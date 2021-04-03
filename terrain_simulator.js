@@ -439,15 +439,20 @@ function skyRender(x,y,z)
 			starVector.add(x,y,z);
 			drawStar(starVector.x, starVector.y, starVector.z);
 		}
-		let moon_theta=map(cycle(t,-18,24),0,12,0,Math.PI);
-		let moon_tilt=Math.PI*50/180;
-		let moonVector=revolve_to_OCS(1000,moon_theta,moon_tilt);
-		moonVector.add(x,y,z);
-		push();
-		translate(moonVector.x,moonVector.y,moonVector.z);
-		fill(255,208,160);
-		sphere(20);
-		pop();
+		for(var i=0;i<90;i++)
+		{
+			
+//			let moon_theta=map(cycle(t,-18,24),0,12,0,Math.PI);
+			let moon_theta=i/90*Math.PI;
+			let moon_tilt=Math.PI*50/180;
+			let moonVector=revolve_to_OCS(1000,moon_theta,moon_tilt);
+			moonVector.add(x,y,z);
+			push();
+			translate(moonVector.x,moonVector.y,moonVector.z);
+			fill(255,208,160);
+			sphere(20);
+			pop();
+		}
 	}
 }
 
