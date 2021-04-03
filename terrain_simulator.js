@@ -80,10 +80,10 @@ class ChunkRenderer
 		push();
 		if(this.y<0) fill(oceanCol);
 		else fill(plainCol);
-		translate(mid_x, (1000+_y)/2, mid_z);
-		box(CHUNK_RADIUS, -(1000+_y), CHUNK_RADIUS);
+		translate(mid_x, (100+_y)/2, mid_z);
+		box(CHUNK_RADIUS, -(100+_y), CHUNK_RADIUS);
 		pop();
-		console.log(this.y);
+		console.log(_y);
 	}
 }
 class SnowyTaigaRenderer extends ChunkRenderer
