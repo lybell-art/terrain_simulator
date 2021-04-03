@@ -171,7 +171,7 @@ class DesertRenderer extends ChunkRenderer
 	}
 	render()
 	{
-		_plainDraw();
+		this._plainDraw();
 	}
 }
 
@@ -196,8 +196,8 @@ class TerrainRenderer
 	}
 	_renderBiome(x, z, chunk, altitude)
 	{
-		const biome=_getBiome(chunk);
-		const biome_hidden=_getBiomeType(chunk);
+		const biome=this._getBiome(chunk);
+		const biome_hidden=this._getBiomeType(chunk);
 		new biome(x,z,biome_hidden,altitude).render();
 	}
 	render(cx,cz)
@@ -212,7 +212,7 @@ class TerrainRenderer
 				let chunk_noise=noise((x+cx)*noiseScale, (z+cz)*noiseScale);
 				let y_noise=noise((x+cx)*noiseScale +oceanFactor, (z+cz)*noiseScale +oceanFactor);
 				y_noise=map(y_noise,0,1,-5, 20);
-				_renderBiome(chunk_noise, y_noise);
+				this._renderBiome(chunk_noise, y_noise);
 			}
 		}
 	}
