@@ -128,7 +128,7 @@ class ChunkRenderer
 	_treeBase(trunkR, trunkH, leavesR, leavesH, trunkCol, leavesCol)
 	{
 		push();
-		translate(0,-(this.y+trunkH)/2,0);
+		translate(0,-this.y-trunkH/2,0);
 		fill(trunkCol);
 		cylinder(trunkR, trunkH, 6, 1);
 		translate(0,-leavesH*2/3,0);
@@ -168,7 +168,7 @@ class SnowyTaigaRenderer extends ChunkRenderer
 		const trunkR=CHUNK_RADIUS/20;
 		const trunkH=CHUNK_RADIUS/3;
 		push();
-		translate(_x,-(this.y+trunkH)/2,_z);
+		translate(_x,-this.y-trunkH/2,_z);
 		fill("#633331");
 		cylinder(trunkR, trunkH, 6, 1);
 		translate(0,-trunkH*2/3,0);
@@ -262,7 +262,7 @@ class SavannaRenderer extends ChunkRenderer
 		const trunkR=CHUNK_RADIUS/24;
 		const trunkH=CHUNK_RADIUS/4;
 		push();
-		translate(_x,-(this.y+trunkH)/2,_z);
+		translate(_x,-this.y-trunkH/2,_z);
 		fill("#8f8576");
 		cylinder(trunkR, trunkH, 6, 1);
 		translate(0,-trunkR*2,0);
@@ -287,12 +287,9 @@ class DesertRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		/*
 		if(_type < 4) this.type=0;
 		else if(_type < 7) this.type=1;
 		else this.type=2;
-		*/
-		this.type=2;
 	}
 	_pyramidDraw(_x, _z)
 	{
@@ -403,9 +400,9 @@ function draw()
 	
 	player.renderCamera();
 	const pos=player.getPos();
-//	tr.render(pos.x, pos.z);
-	tr._renderBiome(0,0,0.95,0);
-	tr._renderBiome(1,0,0.95,10);
+	tr.render(pos.x, pos.z);
+//	tr._renderBiome(0,0,0.95,0);
+//	tr._renderBiome(1,0,0.95,10);
 }
 
 
