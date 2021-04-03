@@ -61,10 +61,10 @@ class Player
 		this.rotX-=deltaX;
 		this.rotY=constrain(this.rotY+deltaY,-Math.PI/2, Math.PI/2);
 	}
-	move(forhead, side)
+	move(rot)
 	{
-		let dir=new p5.Vector(Math.sin(this.rotX), 0, Math.cos(this.rotX));
-		let realDir=new p5.Vector(dir.x*side*this.moveSpeed, 0, dir.z*forhead*this.moveSpeed);
+		let dir=new p5.Vector(Math.sin(this.rotX+rot), 0, Math.cos(this.rotX+rot));
+		let realDir=new p5.Vector(dir.x*this.moveSpeed, 0, dir.z*this.moveSpeed);
 		this.pos.add(realDir);
 	}
 	renderCamera()
@@ -251,14 +251,14 @@ function draw()
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
 
-	if (keyIsDown(UP_ARROW)) player.move(1, 0);
-	if (keyIsDown(DOWN_ARROW)) player.move(-1, 0);
-	if (keyIsDown(LEFT_ARROW)) player.move(0, -1);
-	if (keyIsDown(RIGHT_ARROW)) player.move(0, 1);
+	if (keyIsDown(UP_ARROW)) player.move(0);
+	if (keyIsDown(DOWN_ARROW)) player.move(PI);
+	if (keyIsDown(LEFT_ARROW)) player.move(-PI/2);
+	if (keyIsDown(RIGHT_ARROW)) player.move(PI/2);
 	
 	player.renderCamera();
-//	const pos=player.getPos();
-	tr.render(0,0);
+	const pos=player.getPos();
+	tr.render(pos.x, pos.z);
 }
 
 
