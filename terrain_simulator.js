@@ -57,12 +57,9 @@ class Player
 	renderCamera()
 	{
 		let lookAt=SCS_to_OCS(this.baseDist,this.rotX,this.rotY);
-		console.log(lookAt);
 		lookAt.add(this.pos);
-		console.log(lookAt);
 		this.camera.setPosition(this.pos.x, this.pos.y, this.pos.z);
 		this.camera.lookAt(lookAt.x, lookAt.y, lookAt.z);
-		console.log(this.camera);
 	}
 	getPos()
 	{
@@ -223,18 +220,12 @@ class TerrainRenderer
 		}
 	}
 }
-let mainCamera;
 function setup()
 {
 	createCanvas(windowWidth,windowHeight,WEBGL);
 	player=new Player(0,0);
 	player.startCamera();
 	tr=new TerrainRenderer();
-//	mainCamera = createCamera();
-//	setCamera(mainCamera);
-//	mainCamera.setPosition(330,-480,580);
-//	mainCamera.lookAt(0,-50,0);
-	noLoop();
 	noStroke();
 }
 
