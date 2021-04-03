@@ -385,7 +385,8 @@ function setup()
 function draw()
 {
 	lights();
-	directionalLight(240, 240, 240, 0.2, 1, 0.2);
+//	directionalLight(240, 240, 240, 0.2, 1, 0.2);
+	directionalLight(30, 30, 30, 0.2, 1, 0.2);
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
 
