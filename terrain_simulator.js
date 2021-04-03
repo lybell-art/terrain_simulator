@@ -37,7 +37,8 @@ function getHours()
 	const offset= -today.getTimezoneOffset() * 60000;
 	let t = (today.getTime() + offset)  / 86400000;
 	t= fract(t) * 24;
-	return t;
+//	return t;
+	return 12;
 }
 
 function changeBG() //The background color changes according to the real time
@@ -64,7 +65,12 @@ function changeBG() //The background color changes according to the real time
 function changeLight()
 {
 	let t=getHours();
-	if(between(t,6,19)) directionalLight(250, 250, 250, 0.2, 1, 0.2);
+	if(between(t,6,19))
+	{
+		let theta=constrain(map(cycle(t,-6,24),0,12,0,Math.PI), Math.PI*12/180, Math.PI*168/180);
+		let sunVect=revolve_to_OCS(1,theta,Math.PI/3);
+		directionalLight(250, 250, 250, sunVect.x, sunVect.y, sunVect.z);
+	}
 	else
 	{
 		directionalLight(30, 30, 30, 0.2, 1, 0.2);
@@ -96,6 +102,18 @@ function drawStar(x, y, z)
 		vertex(i*r,-r,r);vertex(i*3*r,0,0);vertex(i*r,r,r);
 	}
 	endShape();
+	pop();
+}
+
+function drawSun(x,y,z,theta, col, size)
+{
+	const tilt=Math.PI*60/180;
+	let vect=revolve_to_OCS(1000,theta,tilt);
+	vect.add(x,y,z);
+	push();
+	translate(vect.x,vect.y,vect.z);
+	fill(col);
+	sphere(size);
 	pop();
 }
 
@@ -439,21 +457,9 @@ function skyRender(x,y,z)
 			starVector.add(x,y,z);
 			drawStar(starVector.x, starVector.y, starVector.z);
 		}
-		for(var i=0;i<90;i++)
-		{
-			
-//			let moon_theta=map(cycle(t,-18,24),0,12,0,Math.PI);
-			let moon_theta=0;
-			let moon_tilt=Math.PI*60/180;
-			let moonVector=revolve_to_OCS(1000,moon_theta,moon_tilt);
-			moonVector.add(x,y,z);
-			push();
-			translate(moonVector.x,moonVector.y,moonVector.z);
-			fill(255,208,160);
-			sphere(20);
-			pop();
-		}
+		drawSun(x,y,z,map(cycle(t,-18,24),0,12,0,Math.PI),"#FFDC96", 20);
 	}
+	else drawSun(x,y,z,map(cycle(t,-6,24),0,12,0,Math.PI),"#FFFCD5", 30);
 }
 
 function setup()
