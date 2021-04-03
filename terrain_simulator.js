@@ -24,32 +24,34 @@ function getHours()
 	return t;
 }
 
-/*
+
 function drawStar(x, y, z)
 {
 	const r=5;
 	push();
 	translate(x,y,z);
 	beginShape(TRIANGLES);
-	vertex(r,r,r);
-	vertex(0,3*r,0);
-	vertex(r,r,-r);
-	
-	vertex(r,r,-r);
-	vertex(0,3*r,0);
-	vertex(-r,r,-r);
-	
-	vertex(-r,r,-r);
-	vertex(0,3*r,0);
-	vertex(-r,r,r);
-	
-	vertex(-r,r,r);
-	vertex(0,3*r,0);
-	vertex(r,r,r);
-	
-	
+	for(var i=-1;i<2;i+=2)
+	{
+		vertex(r,i*r,r);vertex(0,i*3*r,0);vertex(r,i*r,-r);
+		vertex(r,i*r,-r);vertex(0,i*3*r,0);vertex(-r,i*r,-r);
+		vertex(-r,i*r,-r);vertex(0,i*3*r,0);vertex(-r,i*r,r);
+		vertex(-r,i*r,r);vertex(0,i*3*r,0);vvertex(r,i*r,r);
+		
+		vertex(r,r,i*r);vertex(0,0,i*3*r);vertex(r,-r,i*r);
+		vertex(r,-r,i*r);vertex(0,0,i*3*r);vertex(-r,-r,i*r);
+		vertex(-r,-r,i*r);vertex(0,0,i*3*r);vertex(-r,r,i*r);
+		vertex(-r,r,i*r);vertex(0,0,i*3*r);vvertex(r,r,i*r);
+		
+		vertex(i*r,r,r);vertex(i*3*r,0,0);vertex(i*r,r,-r);
+		vertex(i*r,r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,-r);
+		vertex(i*r,-r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,r);
+		vertex(i*r,-r,r);vertex(i*3*r.0,0);vvertex(i*r,r,r);
+	}
+	endShape();
+	pop();
 }
-*/
+
 
 function changeBG() //The background color changes according to the real time
 {
@@ -415,6 +417,22 @@ class TerrainRenderer
 		}
 	}
 }
+function skyRender(x,y,z)
+{
+	const t=getHours();
+	if(!between(t,6,19))
+	{
+		for(var i=0;i<60;i++)
+		{
+			let theta=map(noise(t,i-7560),0,1,-Math.PI,Math.PI);
+			let phi=map(noise(t,i+9234),0,1,0,Math.PI);
+			let starVector=SCS_to_OCS(1000,theta,phi);
+			starVector.add(player.pos);
+			drawStar(starVector.x, starVector.y, starVector.z);
+		}
+	}
+}
+
 function setup()
 {
 	let myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
@@ -429,6 +447,7 @@ function setup()
 function draw()
 {
 	lights();
+	normalMaterial();
 	changeLight();
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
@@ -443,6 +462,9 @@ function draw()
 	player.renderCamera();
 	const pos=player.getPos();
 	tr.render(pos.x, pos.z);
+	
+	emissiveMaterial(215,240,255);
+	skyRender(player.pos.x, player.pos.y, player.pos.z);
 }
 
 
