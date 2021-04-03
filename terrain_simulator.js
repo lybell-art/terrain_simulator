@@ -468,7 +468,7 @@ function skyRender(x,y,z)
 function setup()
 {
 	let myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
-	if(IS_MOBILE) myCanvas.touchMoved(mobile_cameraMove);
+	if(IS_MOBILE == true) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
 	player.startCamera();
 	tr=new TerrainRenderer(20);
