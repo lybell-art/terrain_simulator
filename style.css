@@ -1,0 +1,47 @@
+.buttons{
+  left:80px;
+  bottom:80px;
+  width: 30vw;
+  height: 30vw;
+  background-size: contain;
+  display:fixed;
+}
+
+.buttons div{
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  display:fixed;
+}
+
+#up{
+  background-image:url("assets/arrowUp0.png");
+}
+
+#up.on{
+  background-image:url("assets/arrowUp1.png");
+}
+
+#down{
+  background-image:url("assets/arrowDown0.png");
+}
+
+#down.on{
+  background-image:url("assets/arrowDown1.png");
+}
+
+#left{
+  background-image:url("assets/arrowLeft0.png");
+}
+
+#left.on{
+  background-image:url("assets/arrowLeft1.png");
+}
+
+#right{
+  background-image:url("assets/arrowRight0.png");
+}
+
+#right.on{
+  background-image:url("assets/arrowRight1.png");
+}
