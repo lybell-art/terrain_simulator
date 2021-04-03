@@ -503,7 +503,6 @@ function draw()
 	
 	emissiveMaterial(215,240,255);
 	skyRender(player.pos.x, player.pos.y, player.pos.z);
-	virtualkeys=[false,false,false,false];
 }
 
 //dist(mouseX, mouseY, 80+ 0.15*width, height-80-0.15*width) <= 0.15*width
@@ -536,7 +535,7 @@ function mobile_cameraMove()
 		const vKeyID=["up", "down","left","right"];
 		for(var i=0;i<4;i++)
 		{
-			let b=document.getElementById(vKeyID);
+			let b=document.getElementById(vKeyID[i]);
 			if(virtualkeys[i]) b.classList.add('on');
 			else  b.classList.remove('on');
 		}
@@ -548,9 +547,10 @@ function buttonReset()
 	const vKeyID=["up", "down","left","right"];
 	for(var i=0;i<4;i++)
 	{
-		let b=document.getElementById(vKeyID);
+		let b=document.getElementById(vKeyID[i]);
 		b.classList.remove('on');
 	}
+	virtualkeys=[false,false,false,false];
 }
 
 
