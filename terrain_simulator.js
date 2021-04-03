@@ -31,6 +31,7 @@ function changeBG() //The background color changes according to the real time
 
 function SCS_to_OCS(radius, xRot, yRot)
 {
+	yRot -= Math.PI/2;
 	return new p5.Vector( radius*Math.sin(xRot)*Math.sin(yRot), radius*Math.cos(yRot), radius*Math.cos(xRot)*Math.sin(yRot) );
 }
 
