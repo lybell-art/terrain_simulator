@@ -259,7 +259,7 @@ function draw()
 	if (keyIsDown(DOWN_ARROW)) player.move(0);
 	if (keyIsDown(LEFT_ARROW)) player.move(-PI/2);
 	if (keyIsDown(RIGHT_ARROW)) player.move(PI/2);
-	if (keyIsDown(' ')) player.altitude(1);
+	if (keyIsDown(32)) player.altitude(1);
 	if (keyIsDown(SHIFT)) player.altitude(-1);
 	
 	player.renderCamera();
