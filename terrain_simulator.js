@@ -397,6 +397,7 @@ function setup()
 	tr=new TerrainRenderer(16);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
+	setAttributes('perPixelLighting', false);
 }
 
 function draw()
