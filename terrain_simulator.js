@@ -242,3 +242,10 @@ function draw()
 //	const pos=player.getPos();
 	tr.render(0,0);
 }
+
+
+function windowResized()
+{
+	resizeCanvas(windowWidth, windowHeight, false);
+	player.renderCamera();
+}
