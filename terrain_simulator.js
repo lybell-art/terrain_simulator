@@ -52,7 +52,7 @@ class Player
 	}
 	rotateCamera_PC()
 	{
-		this.rotX=map(mouseX, 0, width, -Math.PI, Math.PI);
+		this.rotX=-constrain(map(mouseX, 0, width, -Math.PI, Math.PI), -Math.PI, Math.PI);
 		this.rotY=constrain(map(mouseY, 0, height, -Math.PI/2, Math.PI/2),-Math.PI/2, Math.PI/2);
 	}
 	rotateCamera_mobile(deltaX, deltaY)
@@ -234,6 +234,7 @@ function setup()
 	player.startCamera();
 	tr=new TerrainRenderer();
 	noStroke();
+	mouseX=width/2, mouseY=height/2;
 }
 
 function draw()
