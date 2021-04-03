@@ -1,5 +1,6 @@
 let player, tr;
 const CHUNK_RADIUS=64;
+const IS_MOBILE=('ontouchstart' in document.documentElement);
 
 function between(input, a, b)
 {
@@ -49,9 +50,14 @@ class Player
 	{
 		setCamera(this.camera);
 	}
-	rotateMouse(deltaX, deltaY)
+	rotateCamera_PC()
 	{
-		this.rotX+=deltaX;
+		this.rotX=map(mouseX, 0, width, -Math.PI, Math.PI);
+		this.rotY=constrain(map(mouseY, 0, height, -Math.PI/2, Math.PI/2),-Math.PI/2, Math.PI/2);
+	}
+	rotateCamera_mobile(deltaX, deltaY)
+	{
+		this.rotX-=deltaX;
 		this.rotY=constrain(this.rotY+deltaY,-Math.PI/2, Math.PI/2);
 	}
 	renderCamera()
@@ -222,7 +228,8 @@ class TerrainRenderer
 }
 function setup()
 {
-	createCanvas(windowWidth,windowHeight,WEBGL);
+	let myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
+	if(IS_MOBILE) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
 	player.startCamera();
 	tr=new TerrainRenderer();
@@ -234,18 +241,21 @@ function draw()
 	lights();
 	directionalLight(240, 240, 240, 0.2, 1, 0.2);
 	changeBG();
+	if(!IS_MOBILE) player.rotateCamera_PC();
 	player.renderCamera();
 //	const pos=player.getPos();
 	tr.render(0,0);
 }
 
-function mouseDragged()
+
+function mobile_cameraMove()
 {
 	const mult= height < width ? height : width;
 	let delta_x=(mouseX - pmouseX) / mult;
 	let delta_y=(mouseY - pmouseY) / mult;
-	player.rotateMouse(delta_x, delta_y);
+	player.rotateCamera_mobile(delta_x, delta_y);
 }
+
 
 
 function windowResized()
