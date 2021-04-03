@@ -300,7 +300,7 @@ class DesertRenderer extends ChunkRenderer
 		push();
 		translate(_x,-(this.y+r)/2,_z);
 		fill("#df9c47");
-		cone(r,-r,4,1);
+		cone(r,-r,6,1);
 		pop();
 	}
 	_treeDraw(_x,_z)
