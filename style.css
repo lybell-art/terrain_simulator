@@ -5,6 +5,7 @@
   height: 30vw;
   background-size: contain;
   position:fixed;
+  z-index:10;
 }
 
 .virtual_button div{
