@@ -26,8 +26,8 @@ function SCS_to_OCS(radius, xRot, yRot)
 }
 function revolve_to_OCS(radius, rot, tilt)
 {
-	yRot -= Math.PI/2;
-	return new p5.Vector( radius*Math.sin(xRot)*Math.sin(yRot), radius*Math.cos(yRot), radius*Math.cos(xRot)*Math.sin(yRot) );
+	tilt = -tilt;
+	return new p5.Vector( radius*Math.cos(rot), radius*Math.sin(rot)*Math.sin(tilt), radius*Math.sin(rot)*Math.cos(tilt) );
 }
 
 
@@ -439,7 +439,15 @@ function skyRender(x,y,z)
 			starVector.add(x,y,z);
 			drawStar(starVector.x, starVector.y, starVector.z);
 		}
-		
+		let moon_theta=map(cycle(t,-18,24),0,12,0,Math.PI);
+		let moon_tilt=Math.PI*50/180;
+		let moonVector=revolve_to_OCS(1000,moon_theta,moon_tilt);
+		moonVector.add(x,y,z);
+		push();
+		translate(moonVector.x,moonVector.y,moonVector.z);
+		fill(208,255,150);
+		sphere(20);
+		pop();
 	}
 }
 
