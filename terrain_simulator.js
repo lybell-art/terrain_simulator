@@ -80,8 +80,8 @@ class ChunkRenderer
 		push();
 		if(this.y<0) fill(oceanCol);
 		else fill(plainCol);
-		translate(mid_x, -(1000+_y)/2, mid_z);
-		box(CHUNK_RADIUS, 1000+_y, CHUNK_RADIUS);
+		translate(mid_x, (1000+_y)/2, mid_z);
+		box(CHUNK_RADIUS, -(1000+_y), CHUNK_RADIUS);
 		pop();
 	}
 }
@@ -233,6 +233,7 @@ function setup()
 function draw()
 {
 	changeBG();
+	scale(3);
 //	player.renderCamera();
 //	const pos=player.getPos();
 	tr.render(0,0);
