@@ -26,7 +26,7 @@ function SCS_to_OCS(radius, xRot, yRot)
 }
 function revolve_to_OCS(radius, rot, tilt)
 {
-	tilt = -tilt;
+//	tilt = -tilt;
 	return new p5.Vector( radius*Math.cos(rot), radius*Math.sin(rot)*Math.sin(tilt), radius*Math.sin(rot)*Math.cos(tilt) );
 }
 
