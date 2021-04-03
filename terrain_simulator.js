@@ -1,4 +1,5 @@
 let player, tr;
+let pTouchX, pTouchY;
 const CHUNK_RADIUS=64;
 //const IS_MOBILE=('ontouchstart' in document.documentElement);
 const IS_MOBILE=(navigator.maxTouchPoints || 'ontouchstart' in document.documentElement);
@@ -465,9 +466,10 @@ function skyRender(x,y,z)
 	else drawSun(x,y,z,map(cycle(t,-6,24),0,12,0,Math.PI),"#FFFCD5", 30);
 }
 
+let myCanvas;
 function setup()
 {
-	let myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
+	myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
 	if(IS_MOBILE > 0 || IS_MOBILE === true) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
 	player.startCamera();
