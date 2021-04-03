@@ -204,7 +204,7 @@ class TerrainRenderer
 		const noiseScale=0.001;
 		const oceanFactor= 993217;
 		let N=this.chunkAmount;
-		for(var z=-N, z<=N; z++)
+		for(var z=-N; z<=N; z++)
 		{
 			for(var x=-N; x<=N; x++)
 			{
