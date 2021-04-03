@@ -82,8 +82,7 @@ class ChunkRenderer
 		else fill(plainCol);
 //		translate(mid_x, -(1000+_y)/2, mid_z);
 //		box(CHUNK_RADIUS, 1000+_y, CHUNK_RADIUS);
-//		console.log(this.y);
-		console.log(_y);
+		console.log(this.y);
 		box(CHUNK_RADIUS, 1000, CHUNK_RADIUS);
 		pop();
 	}
