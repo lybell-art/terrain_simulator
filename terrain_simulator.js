@@ -111,8 +111,10 @@ class ChunkRenderer
 		const mid_z = (this.start_z + this.end_z) /2;
 		const BELOW=100;
 		push();
-		translate(mid_x, (BELOW-_y)/2, mid_z);
-		box(CHUNK_RADIUS, BELOW+_y, CHUNK_RADIUS);
+//		translate(mid_x, (BELOW-_y)/2, mid_z);
+//		box(CHUNK_RADIUS, BELOW+_y, CHUNK_RADIUS);
+		translate(mid_x, _y-0.5, mid_z);
+		box(CHUNK_RADIUS, 1, CHUNK_RADIUS);
 		pop();
 	}
 	_plainDraw(plainCol, oceanCol)
@@ -358,7 +360,7 @@ function setup()
 	if(IS_MOBILE) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
 	player.startCamera();
-	tr=new TerrainRenderer(24);
+	tr=new TerrainRenderer(16);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
 }
