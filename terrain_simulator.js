@@ -519,6 +519,8 @@ function windowResized()
 
 window.onload = function() {
 	let button=document.getElementsByClass("virtual_button")[0];
+	console.log(button);
+	console.log(IS_MOBILE);
 	if(IS_MOBILE) button.style.visibility="visible";
 	else button.style.visibility="hidden";
 };
