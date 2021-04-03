@@ -180,7 +180,7 @@ class TerrainRenderer
 {
 	constructor()
 	{
-		this.chunkAmount=8;
+		this.chunkAmount=12;
 	}
 	_getBiome(noise)
 	{
@@ -203,7 +203,7 @@ class TerrainRenderer
 	}
 	render(cx,cz)
 	{
-		const noiseScale=0.1;
+		const noiseScale=0.02;
 		const oceanFactor= 993217;
 		let N=this.chunkAmount;
 		for(var z=-N; z<=N; z++)
