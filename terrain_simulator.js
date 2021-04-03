@@ -83,6 +83,7 @@ class ChunkRenderer
 		translate(mid_x, (1000+_y)/2, mid_z);
 		box(CHUNK_RADIUS, -(1000+_y), CHUNK_RADIUS);
 		pop();
+		console.log(this.y);
 	}
 }
 class SnowyTaigaRenderer extends ChunkRenderer
@@ -165,8 +166,8 @@ class DesertRenderer extends ChunkRenderer
 		const mid_z = (this.start_z + this.end_z) /2;
 		push();
 		fill(DesertRenderer._plain_color);
-		translate(mid_x, -(1000+_y)/2, mid_z);
-		box(CHUNK_RADIUS, 1000+_y, CHUNK_RADIUS);
+		translate(mid_x, (1000+_y)/2, mid_z);
+		box(CHUNK_RADIUS, -(1000+_y), CHUNK_RADIUS);
 		pop();
 	}
 	render()
