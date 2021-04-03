@@ -401,7 +401,7 @@ function draw()
 	player.renderCamera();
 	const pos=player.getPos();
 //	tr.render(pos.x, pos.z);
-	tr._renderBiome(0,0,0.5,0);
+	tr._renderBiome(0,0,0.7,0);
 }
 
 
