@@ -236,7 +236,7 @@ class PlainRenderer extends ChunkRenderer
 	{
 		push();
 		translate(_x, 0, _z);
-		super._treeBase(CHUNK_RADIUS/16, CHUNK_RADIUS*0.3, CHUNK_RADIUS*2/16, CHUNK_RADIUS/4, "#b77b2f", "#47b72f");
+		super._treeBase(CHUNK_RADIUS/18, CHUNK_RADIUS*0.3, CHUNK_RADIUS*1/12, CHUNK_RADIUS/4, "#b77b2f", "#47b72f");
 		pop();
 	}
 	render()
