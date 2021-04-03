@@ -158,8 +158,8 @@ class SnowyTaigaRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		if(_type < 2) this.type=0;
-		else if(_type < 4) this.type=1;
+		if(_type < 6) this.type=0;
+		else if(_type < 12) this.type=1;
 		else this.type=2;
 		this.type=2;
 	}
@@ -196,10 +196,9 @@ class TaigaRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		if(_type < 2) this.type=0;
-		else if(_type < 4) this.type=1;
+		if(_type < 6) this.type=0;
+		else if(_type < 12) this.type=1;
 		else this.type=2;
-		this.type=2;
 	}
 	_treeDraw(_x,_z)
 	{
@@ -225,10 +224,9 @@ class PlainRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		if(_type < 3) this.type=0;
-		else if(_type < 6) this.type=1;
+		if(_type < 10) this.type=0;
+		else if(_type < 14) this.type=1;
 		else this.type=2;
-		this.type=2;
 	}
 	_treeDraw(_x,_z)
 	{
@@ -254,8 +252,9 @@ class SavannaRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		if(_type < 6) this.type=0;
-		else this.type=1;
+		if(_type < 8) this.type=0;
+		else if(_type < 15) this.type=1;
+		else this.type=2;
 	}
 	_treeDraw(_x,_z)
 	{
@@ -275,8 +274,8 @@ class SavannaRenderer extends ChunkRenderer
 		super._plainDraw(SavannaRenderer._plain_color, SavannaRenderer._ocean_color);
 		if(this.y >=0 )
 		{
-			if(this.type == 1) this._treeScatter(3);
-			else this._treeScatter(1);
+			if(this.type == 1) this._treeScatter(1);
+			else if(this.type == 2) this._treeScatter(3);
 		}
 	}
 }
@@ -287,8 +286,8 @@ class DesertRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		if(_type < 4) this.type=0;
-		else if(_type < 7) this.type=1;
+		if(_type < 6) this.type=0;
+		else if(_type < 12) this.type=1;
 		else this.type=2;
 	}
 	_pyramidDraw(_x, _z)
@@ -347,7 +346,7 @@ class TerrainRenderer
 	_getBiomeType(noise)
 	{
 		const seed=parseInt(noise*(1 << 16));
-		return seed & 7;
+		return seed & 15;
 	}
 	_renderBiome(x, z, chunk, altitude)
 	{
