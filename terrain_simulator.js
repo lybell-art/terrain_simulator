@@ -24,6 +24,33 @@ function getHours()
 	return t;
 }
 
+/*
+function drawStar(x, y, z)
+{
+	const r=5;
+	push();
+	translate(x,y,z);
+	beginShape(TRIANGLES);
+	vertex(r,r,r);
+	vertex(0,3*r,0);
+	vertex(r,r,-r);
+	
+	vertex(r,r,-r);
+	vertex(0,3*r,0);
+	vertex(-r,r,-r);
+	
+	vertex(-r,r,-r);
+	vertex(0,3*r,0);
+	vertex(-r,r,r);
+	
+	vertex(-r,r,r);
+	vertex(0,3*r,0);
+	vertex(r,r,r);
+	
+	
+}
+*/
+
 function changeBG() //The background color changes according to the real time
 {
 	let t=getHours();
@@ -388,6 +415,11 @@ class TerrainRenderer
 		}
 	}
 }
+let mandel;
+function preload() {
+  // load the shader definitions from files
+  mandel = loadShader('shader/vert.glsl', 'shader/frag.glsl');
+}
 function setup()
 {
 	let myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
@@ -397,6 +429,7 @@ function setup()
 	tr=new TerrainRenderer(16);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
+	shader(mandel);
 }
 
 function draw()
