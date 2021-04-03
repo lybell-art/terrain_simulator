@@ -294,7 +294,7 @@ class DesertRenderer extends ChunkRenderer
 	{
 		const r=CHUNK_RADIUS/2;
 		push();
-		translate(_x,-(this.y+r)/2,_z);
+		translate(_x,-this.y-r/2,_z);
 		fill("#df9c47");
 		cone(r,-r,6,1);
 		pop();
