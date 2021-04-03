@@ -265,7 +265,7 @@ class SavannaRenderer extends ChunkRenderer
 		fill("#8f8576");
 		cylinder(trunkR, trunkH, 6, 1);
 		translate(0,-trunkR*2,0);
-		fill("#acc764");
+		fill("#90cb70");
 		sphere(trunkR*2, 8, 6);
 		pop();
 	}
@@ -305,7 +305,7 @@ class DesertRenderer extends ChunkRenderer
 		const trunkH=CHUNK_RADIUS*3/16;
 		push();
 		translate(_x,-this.y-trunkH/2,_z);
-		fill("#acc764");
+		fill("#90cb70");
 		cylinder(trunkR, trunkH, 8, 1);
 		translate(0,-trunkH/2,0);
 		sphere(trunkR, 8, 6);
@@ -400,8 +400,6 @@ function draw()
 	player.renderCamera();
 	const pos=player.getPos();
 	tr.render(pos.x, pos.z);
-//	tr._renderBiome(0,0,0.95,0);
-//	tr._renderBiome(1,0,0.95,10);
 }
 
 
