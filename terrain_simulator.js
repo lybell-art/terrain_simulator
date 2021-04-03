@@ -259,7 +259,7 @@ class SavannaRenderer extends ChunkRenderer
 	}
 	_treeDraw(_x,_z)
 	{
-		const trunkR=CHUNK_RADIUS/20;
+		const trunkR=CHUNK_RADIUS/24;
 		const trunkH=CHUNK_RADIUS/4;
 		push();
 		translate(_x,-(this.y+trunkH)/2,_z);
