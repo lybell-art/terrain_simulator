@@ -1,5 +1,5 @@
 let player, tr;
-const CHUNK_RADIUS=16;
+const CHUNK_RADIUS=64;
 
 function between(input, a, b)
 {
@@ -212,7 +212,7 @@ class TerrainRenderer
 			{
 				let chunk_noise=noise((x+cx)*noiseScale, (z+cz)*noiseScale);
 				let y_noise=noise((x+cx)*noiseScale +oceanFactor, (z+cz)*noiseScale +oceanFactor);
-				y_noise=map(y_noise,0,1,-50, 200);
+				y_noise=map(y_noise,0,1,-50, 150);
 				this._renderBiome(x, z, chunk_noise, y_noise);
 			}
 		}
@@ -235,7 +235,6 @@ function setup()
 function draw()
 {
 	changeBG();
-	scale(3);
 //	player.renderCamera();
 //	const pos=player.getPos();
 	tr.render(0,0);
