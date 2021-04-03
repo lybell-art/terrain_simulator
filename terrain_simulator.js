@@ -1,0 +1,105 @@
+let player, tr;
+const CHUNK_RADIUS=16;
+
+function between(input, a, b)
+{
+	return a<=input && input<=b;
+}
+
+function changeBG() //The background color changes according to the real time
+{
+	const today = new Date();
+	const offset= -today.getTimezoneOffset() * 60000;
+	let t = (today.getTime() + offset)  / 86400000;
+	t= ( t - Math.floor(t) ) * 24;
+	let col;
+	if(between(t,8,13)) col=lerpColor("#D3EDFF", "#53B9FF", map(t, 8, 13, 0, 1));
+	else if(between(t,13,18)) col=lerpColor("#53B9FF", "#E1EAED", map(t, 13, 18, 0, 1));
+	else if(between(t,18,18.5)) col=lerpColor("#E1EAED", "#FAC275", map(t, 18, 18.5, 0, 1));
+	else if(between(t,18.5,19)) col=lerpColor("#FAC275", "#FA6F6E", map(t, 18.5, 19, 0, 1));
+	else if(between(t,19,20)) col=lerpColor("#FA6F6E", "#483E8C", map(t, 19, 20, 0, 1));
+	else if(between(t,20,24)) col=lerpColor("#483E8C", "#142740", map(t, 20, 24, 0, 1));
+	else if(between(t,0,5)) col=color("#142740");
+	else if(between(t,5,6)) col=lerpColor("#142740", "#8F77F3", map(t, 5, 6, 0, 1));
+	else if(between(t,6,6.5)) col=lerpColor("#8F77F3", "#FDABB5", map(t, 6, 6.5, 0, 1));
+	else if(between(t,6.5,7)) col=lerpColor("#FDABB5", "#F5E6CB", map(t, 6.5, 7, 0, 1));
+	else col=lerpColor("#F5E6CB", "#D3EDFF", map(t, 7, 8, 0, 1));
+	
+	background(col);
+}
+
+function SCS_to_OCS(radius, xRot, yRot)
+{
+	return new p5.Vector( radius*Math.sin(xRot)*Math.sin(yRot), radius*Math.cos(yRot), radius*Math.cos(xRot)*Math.sin(yRot) );
+}
+
+class Player
+{
+	constructor(x,y)
+	{
+		this.camera=createCamera();
+		this.pos=new p5.Vector(x,y,100);
+		this.baseDist=height / 2 / tan((30 * PI) / 180);
+		this.rotX=0;
+		this.rotY=0;
+	}
+	startCamera()
+	{
+		setCamera(this.camera);
+	}
+	renderCamera()
+	{
+		let lookAt=SCS_to_OCS(this.baseDist,this.rotX,this.rotY);
+		lookAt.add(this.pos);
+		this.camera.setPosition(this.pos.x, this.pos.y, this.pos.z);
+		this.camera.lookAt(lookAt.x, lookAt.y, lookAt.z);
+	}
+	getPos()
+	{
+		return {x:parseInt(this.pos.x/CHUNK_RADIUS), z:parseInt(this.pos.z/CHUNK_RADIUS)};
+	}
+}
+
+class TerrainRenderer
+{
+	constructor()
+	{
+		this.chunkAmount=8;
+	}
+	_getBiome(noise)
+	{
+		if(between(noise,0,0.1)) return SNOWY_TAIGA;
+		else if(between(noise,0.1,0.3)) return TAIGA;
+		else if(between(noise,0.3,0.6)) return PLAIN;
+		else if(between(noise,0.6,0.8)) return SAVANNA;
+		else if(between(noise,0.8,1)) return DESERT;
+	}
+	render(cx,cz)
+	{
+		const noiseScale=0.001;
+		let N=this.chunkAmount;
+		for(var z=-N, z<=N; z++)
+		{
+			for(var x=-N; x<=N; x++)
+			{
+				let chunk_noise=noise((x+cx)*noiseScale, (z+cz)*noiseScale);
+				
+			}
+		}
+	}
+}
+
+function setup()
+{
+	createCanvas(windowWidth,windowHeight,WEBGL);
+	player=new Player(0,0);
+	player.startCamera();
+	tr=new TerrainRenderer();
+}
+
+function draw()
+{
+	changeBG();
+	renderCamera();
+	tr.render();
+}
