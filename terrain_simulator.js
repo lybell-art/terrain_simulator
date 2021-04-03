@@ -433,7 +433,7 @@ function skyRender(x,y,z)
 	{
 		for(var i=0;i<90;i++)
 		{
-			let theta=map(noise(t,i-7560),0,1,-Math.PI*2,Math.PI*2);
+			let theta=map(noise(t,i-7560),0,1,-Math.PI*2.2,Math.PI*2.2);
 			let phi=map(noise(t,i+9234),0,1,-Math.PI*90/180,Math.PI/6);
 			let starVector=SCS_to_OCS(1000,theta,phi);
 			starVector.add(x,y,z);
