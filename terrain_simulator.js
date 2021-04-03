@@ -68,7 +68,7 @@ function changeLight()
 	if(between(t,6,19))
 	{
 		let theta=constrain(map(cycle(t,-6,24),0,12,0,Math.PI), Math.PI*12/180, Math.PI*168/180);
-		let sunVect=revolve_to_OCS(1,theta,Math.PI/3);
+		let sunVect=revolve_to_OCS(-1,theta,Math.PI/3);
 		directionalLight(250, 250, 250, sunVect.x, sunVect.y, sunVect.z);
 	}
 	else
