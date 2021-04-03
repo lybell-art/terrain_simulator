@@ -225,10 +225,10 @@ function setup()
 //	player=new Player(0,0);
 //	player.startCamera();
 	tr=new TerrainRenderer();
-//	mainCamera = createCamera();
-//	setCamera(mainCamera);
-//	mainCamera.setPosition(330,-480,580);
-//	mainCamera.lookAt(0,-50,0);
+	mainCamera = createCamera();
+	setCamera(mainCamera);
+	mainCamera.setPosition(330,-480,580);
+	mainCamera.lookAt(0,-50,0);
 	noLoop();
 }
 
