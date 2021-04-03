@@ -445,7 +445,7 @@ function skyRender(x,y,z)
 		moonVector.add(x,y,z);
 		push();
 		translate(moonVector.x,moonVector.y,moonVector.z);
-		fill(208,255,150);
+		fill(255,208,160);
 		sphere(20);
 		pop();
 	}
