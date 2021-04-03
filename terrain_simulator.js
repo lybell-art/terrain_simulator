@@ -70,7 +70,7 @@ class ChunkRenderer
 		this.start_z=_z*CHUNK_RADIUS;
 		this.end_z=(_z+1)*CHUNK_RADIUS;
 		this.type=0;
-		this._y=_y;
+		this.y=_y;
 	}
 	_plainDraw(plainCol, oceanCol)
 	{
