@@ -38,7 +38,7 @@ function getHours()
 	let t = (today.getTime() + offset)  / 86400000;
 	t= fract(t) * 24;
 //	return t;
-	return 11;
+	return 18.5;
 }
 
 function changeBG() //The background color changes according to the real time
