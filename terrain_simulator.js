@@ -49,6 +49,11 @@ class Player
 	{
 		setCamera(this.camera);
 	}
+	rotateMouse(deltaX, deltaY)
+	{
+		this.rotX+=deltaX;
+		this.rotY+=deltaY;
+	}
 	renderCamera()
 	{
 		let lookAt=SCS_to_OCS(this.baseDist,this.rotX,this.rotY);
@@ -241,6 +246,14 @@ function draw()
 	player.renderCamera();
 //	const pos=player.getPos();
 	tr.render(0,0);
+}
+
+function mouseDragged()
+{
+	const mult= 0.01;
+	let delta_x=(mouseX - pmouseX) * 0.01;
+	let delta_y=(mouseY - pmouseY) * 0.01;
+	player.rotateMouse(delta_x, delta_y);
 }
 
 
