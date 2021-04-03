@@ -473,7 +473,7 @@ function setup()
 	if(IS_MOBILE > 0 || IS_MOBILE === true) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
 	player.startCamera();
-	tr=new TerrainRenderer(20);
+	tr=new TerrainRenderer(4);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
 }
@@ -506,7 +506,7 @@ function draw()
 function mobile_cameraMove()
 {
 	const mult= height < width ? height : width;
-	console.log("Hey!");
+	console.log(pmouseX);
 	let delta_x=(mouseX - pmouseX) / mult;
 	let delta_y=(mouseY - pmouseY) / mult;
 	player.rotateCamera_mobile(delta_x, delta_y);
