@@ -37,8 +37,7 @@ function getHours()
 	const offset= -today.getTimezoneOffset() * 60000;
 	let t = (today.getTime() + offset)  / 86400000;
 	t= fract(t) * 24;
-//	return t;
-	return 23;
+	return t;
 }
 
 function changeBG() //The background color changes according to the real time
@@ -80,7 +79,7 @@ function changeLight()
 
 function drawStar(x, y, z)
 {
-	const r=2;
+	const r=4;
 	push();
 	translate(x,y,z);
 	beginShape(TRIANGLES);
@@ -108,7 +107,7 @@ function drawStar(x, y, z)
 function drawSun(x,y,z,theta, col, size)
 {
 	const tilt=Math.PI*60/180;
-	let vect=revolve_to_OCS(1000,theta,tilt);
+	let vect=revolve_to_OCS(2500,theta,tilt);
 	vect.add(x,y,z);
 	push();
 	translate(vect.x,vect.y,vect.z);
@@ -455,7 +454,7 @@ function skyRender(x,y,z)
 			{
 				let theta=map(noise(t,i-7560),0,1,-Math.PI*2.2,Math.PI*2.2);
 				let phi=map(noise(t,i+9234),0,1,-Math.PI*90/180,Math.PI/6);
-				let starVector=SCS_to_OCS(1000,theta,phi);
+				let starVector=SCS_to_OCS(2500,theta,phi);
 				starVector.add(x,y,z);
 				drawStar(starVector.x, starVector.y, starVector.z);
 			}
@@ -497,6 +496,7 @@ function draw()
 	
 	emissiveMaterial(215,240,255);
 	skyRender(player.pos.x, player.pos.y, player.pos.z);
+	console.log(dist(mouseX, mouseY, 80+ 0.15*width, height-80-0.15*width));
 }
 
 
@@ -515,3 +515,9 @@ function windowResized()
 	resizeCanvas(windowWidth, windowHeight, false);
 	player.renderCamera();
 }
+
+window.onload = function() {
+	let button=document.getElementsByClass("virtual_button")[0];
+	if(IS_MOBILE) button.style.visibility="visible";
+	else button.style.visibility="hidden";
+};
