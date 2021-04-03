@@ -13,18 +13,18 @@ function changeBG() //The background color changes according to the real time
 	let t = (today.getTime() + offset)  / 86400000;
 	t= ( t - Math.floor(t) ) * 24;
 	let col;
-	let myLerpColor=function(t, col1, col2, time1, time2){return lerpColor(color(col1), color(col2), map(t, time1, time2, 0, 1));}
-	if(between(t,8,13)) col=myLerpColor(t, "#D3EDFF", "#53B9FF", 8, 13);
-	else if(between(t,13,18)) col=myLerpColor(t, "#53B9FF", "#E1EAED", 13, 18);
-	else if(between(t,18,18.5)) col=myLerpColor(t, "#E1EAED", "#FAC275", 18, 18.5);
-	else if(between(t,18.5,19)) col=myLerpColor(t, "#FAC275", "#FA6F6E", 18.5, 19);
-	else if(between(t,19,20)) col=myLerpColor(t, "#FA6F6E", "#483E8C", 19, 20);
-	else if(between(t,20,24)) col=myLerpColor(t, "#483E8C", "#142740", 20, 24);
+	let myLerpColor=function(col1, col2, time1, time2){return lerpColor(color(col1), color(col2), map(t, time1, time2, 0, 1));}
+	if(between(t,8,13)) col=myLerpColor("#D3EDFF", "#53B9FF", 8, 13);
+	else if(between(t,13,18)) col=myLerpColor("#53B9FF", "#E1EAED", 13, 18);
+	else if(between(t,18,18.5)) col=myLerpColor("#E1EAED", "#FAC275", 18, 18.5);
+	else if(between(t,18.5,19)) col=myLerpColor("#FAC275", "#FA6F6E", 18.5, 19);
+	else if(between(t,19,20)) col=myLerpColor("#FA6F6E", "#483E8C", 19, 20);
+	else if(between(t,20,24)) col=myLerpColor("#483E8C", "#142740", 20, 24);
 	else if(between(t,0,5)) col=color("#142740");
-	else if(between(t,5,6)) col=myLerpColor(t, "#142740", "#8F77F3", 5, 6);
-	else if(between(t,6,6.5)) col=myLerpColor(t, "#8F77F3", "#FDABB5", 6, 6.5);
-	else if(between(t,6.5,7)) col=myLerpColor(t, "#FDABB5", "#F5E6CB", 6.5, 7);
-	else col=myLerpColor(t, "#F5E6CB", "#D3EDFF", 7, 8);
+	else if(between(t,5,6)) col=myLerpColor("#142740", "#8F77F3", 5, 6);
+	else if(between(t,6,6.5)) col=myLerpColor("#8F77F3", "#FDABB5", 6, 6.5);
+	else if(between(t,6.5,7)) col=myLerpColor("#FDABB5", "#F5E6CB", 6.5, 7);
+	else col=myLerpColor("#F5E6CB", "#D3EDFF", 7, 8);
 	
 	background(col);
 }
