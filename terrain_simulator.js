@@ -60,6 +60,120 @@ class Player
 	}
 }
 
+class ChunkRenderer
+{
+	constructor(_x, _z, _type, _y)
+	{
+		this.start_x=_x*CHUNK_RADIUS;
+		this.end_x=(_x+1)*CHUNK_RADIUS;
+		this.start_z=_z*CHUNK_RADIUS;
+		this.end_z=(_z+1)*CHUNK_RADIUS;
+		this.type=0;
+		this._y=_y;
+	}
+	_plainDraw(plainCol, oceanCol)
+	{
+		const _y = (this.y < 0 ? 0 : this.y);
+		const mid_x = (this.start_x + this.end_x) /2;
+		const mid_z = (this.start_z + this.end_z) /2;
+		push();
+		if(this.y<0) fill(oceanCol);
+		else fill(plainCol);
+		translate(mid_x, -(1000+_y)/2, mid_z);
+		box(CHUNK_RADIUS, 1000+_y, CHUNK_RADIUS);
+		pop();
+	}
+}
+class SnowyTaigaRenderer
+{
+	static _plain_color = color(240,252,255);
+	static _ocean_color = color(57, 56, 201);
+	constructor(_x, _z, _type, _y)
+	{
+		super(_x, _z, _type, _y);
+		if(_type < 2) this.type=0;
+		else if(_type < 4) this.type=1;
+		else this.type=2;
+	}
+	render()
+	{
+		super._plainDraw(SnowyTaigaRenderer._plain_color, SnowyTaigaRenderer._ocean_color);
+	}
+}
+class TaigaRenderer
+{
+	static _plain_color = color(61, 175, 126);
+	static _ocean_color = color(58, 112, 218);
+	constructor(_x, _z, _type, _y)
+	{
+		super(_x, _z, _type, _y);
+		if(_type < 2) this.type=0;
+		else if(_type < 4) this.type=1;
+		else this.type=2;
+	}
+	render()
+	{
+		super._plainDraw(TaigaRenderer._plain_color, TaigaRenderer._ocean_color);
+	}
+}
+class PlainRenderer
+{
+	static _plain_color = color(110, 189, 89);
+	static _ocean_color = color(69, 173, 242);
+	constructor(_x, _z, _type, _y)
+	{
+		super(_x, _z, _type, _y);
+		if(_type < 3) this.type=0;
+		else if(_type < 6) this.type=1;
+		else this.type=2;
+	}
+	render()
+	{
+		super._plainDraw(PlainRenderer._plain_color, PlainRenderer._ocean_color);
+	}
+}
+class SavannaRenderer
+{
+	static _plain_color = color(172, 183, 101);
+	static _ocean_color = color(67, 238, 200);
+	constructor(_x, _z, _type, _y)
+	{
+		super(_x, _z, _type, _y);
+		if(_type < 6) this.type=0;
+		else this.type=1;
+	}
+	render()
+	{
+		super._plainDraw(SavannaRenderer._plain_color, SavannaRenderer._ocean_color);
+	}
+}
+class DesertRenderer
+{
+	static _plain_color = color(235,198,160);
+	constructor(_x, _z, _type, _y)
+	{
+		super(_x, _z, _type, _y);
+		if(_type < 5) this.type=0;
+		else if(_type < 7) this.type=1;
+		else this.type=2;
+	}
+	_plainDraw()
+	{
+		const _y = this.y;
+		const mid_x = (this.start_x + this.end_x) /2;
+		const mid_z = (this.start_z + this.end_z) /2;
+		push();
+		fill(DesertRenderer._plain_color);
+		translate(mid_x, -(1000+_y)/2, mid_z);
+		box(CHUNK_RADIUS, 1000+_y, CHUNK_RADIUS);
+		pop();
+	}
+	render()
+	{
+		_plainDraw();
+	}
+}
+
 class TerrainRenderer
 {
 	constructor()
@@ -68,22 +182,36 @@ class TerrainRenderer
 	}
 	_getBiome(noise)
 	{
-		if(between(noise,0,0.1)) return SNOWY_TAIGA;
-		else if(between(noise,0.1,0.3)) return TAIGA;
-		else if(between(noise,0.3,0.6)) return PLAIN;
-		else if(between(noise,0.6,0.8)) return SAVANNA;
-		else if(between(noise,0.8,1)) return DESERT;
+		if(between(noise,0,0.1)) return SnowyTaigaRenderer;
+		else if(between(noise,0.1,0.3)) return TaigaRenderer;
+		else if(between(noise,0.3,0.6)) return PlainRenderer;
+		else if(between(noise,0.6,0.8)) return SavannaRenderer;
+		else if(between(noise,0.8,1)) return DesertRenderer;
+	}
+	_getBiomeType(noise)
+	{
+		const seed=parseInt(noise*(1 << 16));
+		return seed & 7;
+	}
+	_renderBiome(x, z, chunk, altitude)
+	{
+		const biome=_getBiome(chunk);
+		const biome_hidden=_getBiomeType(chunk);
+		new biome(x,z,biome_hidden,altitude).render();
 	}
 	render(cx,cz)
 	{
 		const noiseScale=0.001;
+		const oceanFactor= 993217;
 		let N=this.chunkAmount;
 		for(var z=-N, z<=N; z++)
 		{
 			for(var x=-N; x<=N; x++)
 			{
 				let chunk_noise=noise((x+cx)*noiseScale, (z+cz)*noiseScale);
-				
+				let y_noise=noise((x+cx)*noiseScale +oceanFactor, (z+cz)*noiseScale +oceanFactor);
+				y_noise=map(y_noise,0,1,-5, 20);
+				_renderBiome(chunk_noise, y_noise);
 			}
 		}
 	}
@@ -100,6 +228,7 @@ function setup()
 function draw()
 {
 	changeBG();
-	renderCamera();
-	tr.render();
+	player.renderCamera();
+	const pos=player.getPos();
+	tr.render(pos.x, pos.z);
 }
