@@ -213,7 +213,7 @@ class TerrainRenderer
 				let chunk_noise=noise((x+cx)*noiseScale, (z+cz)*noiseScale);
 				let y_noise=noise((x+cx)*noiseScale +oceanFactor, (z+cz)*noiseScale +oceanFactor);
 				y_noise=map(y_noise,0,1,-5, 20);
-				this._renderBiome(chunk_noise, y_noise);
+				this._renderBiome(x, z, chunk_noise, y_noise);
 			}
 		}
 	}
