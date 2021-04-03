@@ -449,7 +449,7 @@ function skyRender(x,y,z)
 	const t=getHours();
 	if(!between(t,6,18))
 	{
-		fill(215,240,255,parseInt(constrain(cycle(t,-18,24),0,1)*255));
+		fill(215,240,255,parseInt(constrain(cycle(t*t,-18,24),0,1)*255));
 		for(var i=0;i<90;i++)
 		{
 			let theta=map(noise(t,i-7560),0,1,-Math.PI*2.2,Math.PI*2.2);
