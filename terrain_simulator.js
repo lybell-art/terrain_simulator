@@ -180,8 +180,11 @@ class SnowyTaigaRenderer extends ChunkRenderer
 	render()
 	{
 		super._plainDraw(SnowyTaigaRenderer._plain_color, SnowyTaigaRenderer._ocean_color);
-		if(this.type == 1) this._treeScatter(1);
-		else if(this.type ==2) this._treeScatter(5);
+		if(this.y >=0 )
+		{
+			if(this.type == 1) this._treeScatter(1);
+			else if(this.type ==2) this._treeScatter(5);
+		}
 	}
 }
 class TaigaRenderer extends ChunkRenderer
@@ -205,8 +208,11 @@ class TaigaRenderer extends ChunkRenderer
 	render()
 	{
 		super._plainDraw(TaigaRenderer._plain_color, TaigaRenderer._ocean_color);
-		if(this.type == 1) this._treeScatter(1);
-		else if(this.type ==2) this._treeScatter(5);
+		if(this.y >=0 )
+		{
+			if(this.type == 1) this._treeScatter(1);
+			else if(this.type ==2) this._treeScatter(5);
+		}
 	}
 }
 class PlainRenderer extends ChunkRenderer
@@ -230,8 +236,11 @@ class PlainRenderer extends ChunkRenderer
 	render()
 	{
 		super._plainDraw(PlainRenderer._plain_color, PlainRenderer._ocean_color);
-		if(this.type == 1) this._treeScatter(1);
-		else if(this.type ==2) this._treeScatter(5);
+		if(this.y >=0 )
+		{
+			if(this.type == 1) this._treeScatter(1);
+			else if(this.type ==2) this._treeScatter(5);
+		}
 	}
 }
 class SavannaRenderer extends ChunkRenderer
@@ -260,8 +269,11 @@ class SavannaRenderer extends ChunkRenderer
 	render()
 	{
 		super._plainDraw(SavannaRenderer._plain_color, SavannaRenderer._ocean_color);
-		if(this.type == 1) this._treeScatter(3);
-		else this._treeScatter(1);
+		if(this.y >=0 )
+		{
+			if(this.type == 1) this._treeScatter(3);
+			else this._treeScatter(1);
+		}
 	}
 }
 class DesertRenderer extends ChunkRenderer
@@ -299,15 +311,18 @@ class DesertRenderer extends ChunkRenderer
 	render()
 	{
 		super._plainDraw(DesertRenderer._plain_color, DesertRenderer._ocean_color);
-		if(this.type == 1)
+		if(this.y >=0 )
 		{
-			let pyramidX=frand(this.start_x, this.typeSeed*128);
-			let pyramidZ=frand(this.start_z, this.typeSeed*32);
-			pyramidX=this.start_x+pyramidX*CHUNK_RADIUS;
-			pyramidZ=this.start_z+pyramidZ*CHUNK_RADIUS;
-			this._pyramidDraw(pyramidX,pyramidZ);
+			if(this.type == 1)
+			{
+				let pyramidX=frand(this.start_x, this.typeSeed*128);
+				let pyramidZ=frand(this.start_z, this.typeSeed*32);
+				pyramidX=this.start_x+pyramidX*CHUNK_RADIUS;
+				pyramidZ=this.start_z+pyramidZ*CHUNK_RADIUS;
+				this._pyramidDraw(pyramidX,pyramidZ);
+			}
+			else if(this.type ==2) this._treeScatter(3);
 		}
-		else if(this.type ==2) this._treeScatter(3);
 	}
 }
 
