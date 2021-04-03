@@ -36,17 +36,17 @@ function drawStar(x, y, z)
 		vertex(r,i*r,r);vertex(0,i*3*r,0);vertex(r,i*r,-r);
 		vertex(r,i*r,-r);vertex(0,i*3*r,0);vertex(-r,i*r,-r);
 		vertex(-r,i*r,-r);vertex(0,i*3*r,0);vertex(-r,i*r,r);
-		vertex(-r,i*r,r);vertex(0,i*3*r,0);vvertex(r,i*r,r);
+		vertex(-r,i*r,r);vertex(0,i*3*r,0);vertex(r,i*r,r);
 		
 		vertex(r,r,i*r);vertex(0,0,i*3*r);vertex(r,-r,i*r);
 		vertex(r,-r,i*r);vertex(0,0,i*3*r);vertex(-r,-r,i*r);
 		vertex(-r,-r,i*r);vertex(0,0,i*3*r);vertex(-r,r,i*r);
-		vertex(-r,r,i*r);vertex(0,0,i*3*r);vvertex(r,r,i*r);
+		vertex(-r,r,i*r);vertex(0,0,i*3*r);vertex(r,r,i*r);
 		
 		vertex(i*r,r,r);vertex(i*3*r,0,0);vertex(i*r,r,-r);
 		vertex(i*r,r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,-r);
 		vertex(i*r,-r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,r);
-		vertex(i*r,-r,r);vertex(i*3*r,0,0);vvertex(i*r,r,r);
+		vertex(i*r,-r,r);vertex(i*3*r,0,0);vertex(i*r,r,r);
 	}
 	endShape();
 	pop();
