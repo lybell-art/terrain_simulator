@@ -308,7 +308,7 @@ class DesertRenderer extends ChunkRenderer
 		const trunkR=CHUNK_RADIUS/16;
 		const trunkH=CHUNK_RADIUS*3/16;
 		push();
-		translate(_x,-this.y-trunkH)/2,_z);
+		translate(_x,-this.y-trunkH/2,_z);
 		fill("#acc764");
 		cylinder(trunkR, trunkH, 8, 1);
 		translate(0,-trunkH/2,0);
