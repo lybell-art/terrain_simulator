@@ -490,7 +490,11 @@ function draw()
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
 	
-	if(!!IS_MOBILE && touches.length > 0 && mobile_inButton()) mobile_playerMove();
+	if(!!IS_MOBILE)
+	{
+		if(touches.length > 0 && mobile_inButton()) mobile_playerMove();
+		else if(touches.length == 0) buttonReset();
+	}
 
 	if (keyIsDown(UP_ARROW) || keyIsDown(87) || virtualkeys[0]) player.move(PI);
 	if (keyIsDown(DOWN_ARROW) || keyIsDown(83) ||virtualkeys[1]) player.move(0);
@@ -534,6 +538,7 @@ function mobile_playerMove()
 	let vect2=createVector(80+ 0.15*width, height-80-0.15*width);
 	let vect3=p5.Vector.sub(vect1,vect2);
 	let heading=vect3.heading();
+	virtualkeys=[false,false,false,false];
 	if(between(heading,-Math.PI*3/4, -Math.PI*1/4)) virtualkeys[0]=true;
 	else if(between(heading,-Math.PI*1/4, Math.PI*1/4)) virtualkeys[3]=true;
 	else if(between(heading,Math.PI*1/4, Math.PI*3/4)) virtualkeys[1]=true;
