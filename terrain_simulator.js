@@ -163,8 +163,8 @@ class SnowyTaigaRenderer extends ChunkRenderer
 	}
 	_treeDraw(_x,_z)
 	{
-		const trunkR=CHUNK_RADIUS/16;
-		const trunkH=CHUNK_RADIUS/4;
+		const trunkR=CHUNK_RADIUS/20;
+		const trunkH=CHUNK_RADIUS/3;
 		push();
 		translate(_x,-(this.y+trunkH)/2,_z);
 		fill("#633331");
@@ -202,7 +202,7 @@ class TaigaRenderer extends ChunkRenderer
 	{
 		push();
 		translate(_x, 0, _z);
-		super._treeBase(CHUNK_RADIUS/16, CHUNK_RADIUS/4, CHUNK_RADIUS*3/16, CHUNK_RADIUS/3, "#633331", "#1a7d56");
+		super._treeBase(CHUNK_RADIUS/20, CHUNK_RADIUS/3, CHUNK_RADIUS*3/16, CHUNK_RADIUS/3, "#633331", "#1a7d56");
 		pop();
 	}
 	render()
@@ -230,7 +230,7 @@ class PlainRenderer extends ChunkRenderer
 	{
 		push();
 		translate(_x, 0, _z);
-		super._treeBase(CHUNK_RADIUS/14, CHUNK_RADIUS/6, CHUNK_RADIUS*3/16, CHUNK_RADIUS/4, "#b77b2f", "#47b72f");
+		super._treeBase(CHUNK_RADIUS/16, CHUNK_RADIUS/4, CHUNK_RADIUS*3/16, CHUNK_RADIUS/4, "#b77b2f", "#47b72f");
 		pop();
 	}
 	render()
@@ -255,15 +255,15 @@ class SavannaRenderer extends ChunkRenderer
 	}
 	_treeDraw(_x,_z)
 	{
-		const trunkR=CHUNK_RADIUS/15;
-		const trunkH=CHUNK_RADIUS/6;
+		const trunkR=CHUNK_RADIUS/20;
+		const trunkH=CHUNK_RADIUS/4;
 		push();
 		translate(_x,-(this.y+trunkH)/2,_z);
 		fill("#8f8576");
 		cylinder(trunkR, trunkH, 6, 1);
 		translate(0,-trunkR*2,0);
 		fill("#acc764");
-		sphere(trunkR*4, 8, 6);
+		sphere(trunkR*2, 8, 6);
 		pop();
 	}
 	render()
@@ -387,10 +387,10 @@ function draw()
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
 
-	if (keyIsDown(UP_ARROW)) player.move(PI);
-	if (keyIsDown(DOWN_ARROW)) player.move(0);
-	if (keyIsDown(LEFT_ARROW)) player.move(-PI/2);
-	if (keyIsDown(RIGHT_ARROW)) player.move(PI/2);
+	if (keyIsDown(UP_ARROW) || keyIsDown(87)) player.move(PI);
+	if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) player.move(0);
+	if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) player.move(-PI/2);
+	if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) player.move(PI/2);
 	if (keyIsDown(32)) player.altitude(1);
 	if (keyIsDown(SHIFT)) player.altitude(-1);
 	
