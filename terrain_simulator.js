@@ -336,10 +336,10 @@ class TerrainRenderer
 	}
 	_getBiome(noise)
 	{
-		if(between(noise,0,0.3)) return SnowyTaigaRenderer;
-		else if(between(noise,0.3,0.4)) return TaigaRenderer;
-		else if(between(noise,0.4,0.6)) return PlainRenderer;
-		else if(between(noise,0.6,0.7)) return SavannaRenderer;
+		if(between(noise,0,0.25)) return SnowyTaigaRenderer;
+		else if(between(noise,0.25,0.38)) return TaigaRenderer;
+		else if(between(noise,0.38,0.62)) return PlainRenderer;
+		else if(between(noise,0.62,0.75)) return SavannaRenderer;
 		else return DesertRenderer;
 	}
 	_getBiomeType(noise)
