@@ -111,8 +111,8 @@ class ChunkRenderer
 		const mid_z = (this.start_z + this.end_z) /2;
 		const BELOW=100;
 		push();
-//		translate(mid_x, (BELOW-_y)/2, mid_z);
-//		box(CHUNK_RADIUS, BELOW+_y, CHUNK_RADIUS);
+		translate(mid_x, (BELOW-_y)/2, mid_z);
+		box(CHUNK_RADIUS, BELOW+_y, CHUNK_RADIUS);
 		translate(mid_x, _y-0.5, mid_z);
 		box(CHUNK_RADIUS, 1, CHUNK_RADIUS);
 		pop();
