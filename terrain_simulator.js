@@ -425,7 +425,7 @@ function skyRender(x,y,z)
 		for(var i=0;i<60;i++)
 		{
 			let theta=map(noise(t,i-7560),0,1,-Math.PI*2,Math.PI*2);
-			let phi=map(Math.pow(noise(t,i+9234),0.25),0,1,-Math.PI*105/180,0);
+			let phi=map(Math.pow(noise(t,i+9234),0.6),0,1,-Math.PI*105/180,0);
 			let starVector=SCS_to_OCS(1000,theta,phi);
 			starVector.add(player.pos);
 			drawStar(starVector.x, starVector.y, starVector.z);
