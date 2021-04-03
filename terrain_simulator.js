@@ -6,13 +6,21 @@ function between(input, a, b)
 {
 	return a<=input && input<=b;
 }
+function fract(n)
+{
+	return n - Math.floor(n);
+}
+function frand(x,y)
+{
+	return fract(Math.sin(x * 9106.966345 + y * 3742.931314) * 49824.21294);
+}
 
 function changeBG() //The background color changes according to the real time
 {
 	const today = new Date();
 	const offset= -today.getTimezoneOffset() * 60000;
 	let t = (today.getTime() + offset)  / 86400000;
-	t= ( t - Math.floor(t) ) * 24;
+	t= fract(t) * 24;
 	let col;
 	let myLerpColor=function(col1, col2, time1, time2){return lerpColor(color(col1), color(col2), map(t, time1, time2, 0, 1));}
 	if(between(t,8,13)) col=myLerpColor("#D3EDFF", "#53B9FF", 8, 13);
@@ -93,6 +101,7 @@ class ChunkRenderer
 		this.end_x=(_x+1)*CHUNK_RADIUS;
 		this.start_z=_z*CHUNK_RADIUS;
 		this.end_z=(_z+1)*CHUNK_RADIUS;
+		this.typeSeed=_type;
 		this.type=0;
 		this.y=_y;
 	}
@@ -113,6 +122,31 @@ class ChunkRenderer
 		else fill(plainCol);
 		this._plainPillar(_y);
 	}
+	_treeBase(trunkR, trunkH, leavesR, leavesH, trunkCol, leavesCol)
+	{
+		push();
+		translate(0,-(this.y+trunkH)/2,0);
+		fill(trunkCol);
+		cylinder(trunkR, trunkH, 6, 1);
+		translate(0,-leavesH*2/3,0);
+		fill(leavesCol);
+		cone(leavesR, -leavesH, 12, 1);
+		pop();
+	}
+	_treeDraw(x,z)
+	{
+	}
+	_treeScatter(n)
+	{
+		for(var i=0; i<n; i++)
+		{
+			let treeX=frand(this.start_x, this.typeSeed*128+i);
+			let treeZ=frand(this.start_z, this.typeSeed*32-i);
+			treeX=this.start_x+treeX*CHUNK_RADIUS;
+			treeZ=this.start_z+treeZ*CHUNK_RADIUS;
+			_treeDraw(treeX, treeZ);
+		}
+	}
 }
 class SnowyTaigaRenderer extends ChunkRenderer
 {
@@ -125,9 +159,27 @@ class SnowyTaigaRenderer extends ChunkRenderer
 		else if(_type < 4) this.type=1;
 		else this.type=2;
 	}
+	_treeDraw(_x,_z)
+	{
+		const trunkR=CHUNK_RADIUS/16;
+		const trunkH=CHUNK_RADIUS/4;
+		push();
+		translate(_x,-(this.y+trunkH)/2,_z);
+		fill("#633331");
+		cylinder(trunkR, trunkH, 6, 1);
+		translate(0,-trunkH*2/3,0);
+		fill("#1a7d56");
+		cone(trunkR*3, -trunkH, 12, 1);
+		translate(0,-trunkH*2/3,0);
+		fill("#c8edf7");
+		cone(trunkR*3, -trunkH, 12, 1);
+		pop();
+	}
 	render()
 	{
 		super._plainDraw(SnowyTaigaRenderer._plain_color, SnowyTaigaRenderer._ocean_color);
+		if(this.type == 1) this._treeScatter(1);
+		else if(this.type ==2) this._treeScatter(5);
 	}
 }
 class TaigaRenderer extends ChunkRenderer
@@ -141,9 +193,18 @@ class TaigaRenderer extends ChunkRenderer
 		else if(_type < 4) this.type=1;
 		else this.type=2;
 	}
+	_treeDraw(_x,_z)
+	{
+		push();
+		translate(_x, 0, _z);
+		super._treeBase(CHUNK_RADIUS/16, CHUNK_RADIUS/4, CHUNK_RADIUS*3/16, CHUNK_RADIUS/3, "#633331", "#1a7d56");
+		pop();
+	}
 	render()
 	{
 		super._plainDraw(TaigaRenderer._plain_color, TaigaRenderer._ocean_color);
+		if(this.type == 1) this._treeScatter(1);
+		else if(this.type ==2) this._treeScatter(5);
 	}
 }
 class PlainRenderer extends ChunkRenderer
@@ -157,9 +218,18 @@ class PlainRenderer extends ChunkRenderer
 		else if(_type < 6) this.type=1;
 		else this.type=2;
 	}
+	_treeDraw(_x,_z)
+	{
+		push();
+		translate(_x, 0, _z);
+		super._treeBase(CHUNK_RADIUS/14, CHUNK_RADIUS/6, CHUNK_RADIUS*3/16, CHUNK_RADIUS/4, "#b77b2f", "#47b72f");
+		pop();
+	}
 	render()
 	{
 		super._plainDraw(PlainRenderer._plain_color, PlainRenderer._ocean_color);
+		if(this.type == 1) this._treeScatter(1);
+		else if(this.type ==2) this._treeScatter(5);
 	}
 }
 class SavannaRenderer extends ChunkRenderer
@@ -172,9 +242,24 @@ class SavannaRenderer extends ChunkRenderer
 		if(_type < 6) this.type=0;
 		else this.type=1;
 	}
+	_treeDraw(_x,_z)
+	{
+		const trunkR=CHUNK_RADIUS/15;
+		const trunkH=CHUNK_RADIUS/6;
+		push();
+		translate(_x,-(this.y+trunkH)/2,_z);
+		fill("#8f8576");
+		cylinder(trunkR, trunkH, 6, 1);
+		translate(0,-trunkR*2,0);
+		fill("#acc764");
+		sphere(trunkR*4, 8, 6);
+		pop();
+	}
 	render()
 	{
 		super._plainDraw(SavannaRenderer._plain_color, SavannaRenderer._ocean_color);
+		if(this.type == 1) this._treeScatter(3);
+		else this._treeScatter(1);
 	}
 }
 class DesertRenderer extends ChunkRenderer
@@ -184,13 +269,43 @@ class DesertRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		if(_type < 5) this.type=0;
+		if(_type < 4) this.type=0;
 		else if(_type < 7) this.type=1;
 		else this.type=2;
+	}
+	_pyramidDraw(_x, _z)
+	{
+		const r=CHUNK_RADIUS/2;
+		push();
+		translate(_x,-(this.y+r)/2,_z);
+		fill(#df9c47);
+		cone(r,-r,4,1);
+		pop();
+	}
+	_treeDraw(_x,_z)
+	{
+		const trunkR=CHUNK_RADIUS/8;
+		const trunkH=CHUNK_RADIUS*3/16;
+		push();
+		translate(_x,-(this.y+trunkH)/2,_z);
+		fill("#acc764");
+		cylinder(trunkR, trunkH, 6, 1);
+		translate(0,-trunkH/2,0);
+		sphere(trunkR, 8, 6);
+		pop();
 	}
 	render()
 	{
 		super._plainDraw(DesertRenderer._plain_color, DesertRenderer._ocean_color);
+		if(this.type == 1)
+		{
+			let pyramidX=frand(this.start_x, this.typeSeed*128);
+			let pyramidZ=frand(this.start_z, this.typeSeed*32);
+			pyramidX=this.start_x+pyramidX*CHUNK_RADIUS;
+			pyramidZ=this.start_z+pyramidZ*CHUNK_RADIUS;
+			this.pyramidDraw(pyramidX,pyramidZ);
+		}
+		else if(this.type ==2) this._treeScatter(3);
 	}
 }
 
@@ -243,7 +358,7 @@ function setup()
 	if(IS_MOBILE) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
 	player.startCamera();
-	tr=new TerrainRenderer(32);
+	tr=new TerrainRenderer(24);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
 }
