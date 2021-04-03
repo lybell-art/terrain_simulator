@@ -144,7 +144,7 @@ class ChunkRenderer
 			let treeZ=frand(this.start_z, this.typeSeed*32-i);
 			treeX=this.start_x+treeX*CHUNK_RADIUS;
 			treeZ=this.start_z+treeZ*CHUNK_RADIUS;
-			_treeDraw(treeX, treeZ);
+			this._treeDraw(treeX, treeZ);
 		}
 	}
 }
