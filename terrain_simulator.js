@@ -6,6 +6,11 @@ function between(input, a, b)
 {
 	return a<=input && input<=b;
 }
+function cycle(n, p, c)
+{
+	let v=n+p;
+	return v-Math.floor(v/c)*c;
+}
 function fract(n)
 {
 	return n - Math.floor(n);
@@ -14,6 +19,17 @@ function frand(x,y)
 {
 	return fract(Math.sin(x * 9106.966345 + y * 3742.931314) * 49824.21294);
 }
+function SCS_to_OCS(radius, xRot, yRot)
+{
+	yRot -= Math.PI/2;
+	return new p5.Vector( radius*Math.sin(xRot)*Math.sin(yRot), radius*Math.cos(yRot), radius*Math.cos(xRot)*Math.sin(yRot) );
+}
+function revolve_to_OCS(radius, rot, tilt)
+{
+	yRot -= Math.PI/2;
+	return new p5.Vector( radius*Math.sin(xRot)*Math.sin(yRot), radius*Math.cos(yRot), radius*Math.cos(xRot)*Math.sin(yRot) );
+}
+
 
 function getHours()
 {
@@ -23,35 +39,6 @@ function getHours()
 	t= fract(t) * 24;
 	return t;
 }
-
-
-function drawStar(x, y, z)
-{
-	const r=2;
-	push();
-	translate(x,y,z);
-	beginShape(TRIANGLES);
-	for(var i=-1;i<2;i+=2)
-	{
-		vertex(r,i*r,r);vertex(0,i*3*r,0);vertex(r,i*r,-r);
-		vertex(r,i*r,-r);vertex(0,i*3*r,0);vertex(-r,i*r,-r);
-		vertex(-r,i*r,-r);vertex(0,i*3*r,0);vertex(-r,i*r,r);
-		vertex(-r,i*r,r);vertex(0,i*3*r,0);vertex(r,i*r,r);
-		
-		vertex(r,r,i*r);vertex(0,0,i*3*r);vertex(r,-r,i*r);
-		vertex(r,-r,i*r);vertex(0,0,i*3*r);vertex(-r,-r,i*r);
-		vertex(-r,-r,i*r);vertex(0,0,i*3*r);vertex(-r,r,i*r);
-		vertex(-r,r,i*r);vertex(0,0,i*3*r);vertex(r,r,i*r);
-		
-		vertex(i*r,r,r);vertex(i*3*r,0,0);vertex(i*r,r,-r);
-		vertex(i*r,r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,-r);
-		vertex(i*r,-r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,r);
-		vertex(i*r,-r,r);vertex(i*3*r,0,0);vertex(i*r,r,r);
-	}
-	endShape();
-	pop();
-}
-
 
 function changeBG() //The background color changes according to the real time
 {
@@ -85,11 +72,33 @@ function changeLight()
 	}
 }
 
-function SCS_to_OCS(radius, xRot, yRot)
+function drawStar(x, y, z)
 {
-	yRot -= Math.PI/2;
-	return new p5.Vector( radius*Math.sin(xRot)*Math.sin(yRot), radius*Math.cos(yRot), radius*Math.cos(xRot)*Math.sin(yRot) );
+	const r=2;
+	push();
+	translate(x,y,z);
+	beginShape(TRIANGLES);
+	for(var i=-1;i<2;i+=2)
+	{
+		vertex(r,i*r,r);vertex(0,i*3*r,0);vertex(r,i*r,-r);
+		vertex(r,i*r,-r);vertex(0,i*3*r,0);vertex(-r,i*r,-r);
+		vertex(-r,i*r,-r);vertex(0,i*3*r,0);vertex(-r,i*r,r);
+		vertex(-r,i*r,r);vertex(0,i*3*r,0);vertex(r,i*r,r);
+		
+		vertex(r,r,i*r);vertex(0,0,i*3*r);vertex(r,-r,i*r);
+		vertex(r,-r,i*r);vertex(0,0,i*3*r);vertex(-r,-r,i*r);
+		vertex(-r,-r,i*r);vertex(0,0,i*3*r);vertex(-r,r,i*r);
+		vertex(-r,r,i*r);vertex(0,0,i*3*r);vertex(r,r,i*r);
+		
+		vertex(i*r,r,r);vertex(i*3*r,0,0);vertex(i*r,r,-r);
+		vertex(i*r,r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,-r);
+		vertex(i*r,-r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,r);
+		vertex(i*r,-r,r);vertex(i*3*r,0,0);vertex(i*r,r,r);
+	}
+	endShape();
+	pop();
 }
+
 
 class Player
 {
@@ -420,16 +429,17 @@ class TerrainRenderer
 function skyRender(x,y,z)
 {
 	const t=getHours();
-	if(!between(t,6,19))
+	if(!between(t,6,18))
 	{
-		for(var i=0;i<80;i++)
+		for(var i=0;i<90;i++)
 		{
 			let theta=map(noise(t,i-7560),0,1,-Math.PI*2,Math.PI*2);
 			let phi=map(noise(t,i+9234),0,1,-Math.PI*75/180,Math.PI/6);
 			let starVector=SCS_to_OCS(1000,theta,phi);
-			starVector.add(player.pos);
+			starVector.add(x,y,z);
 			drawStar(starVector.x, starVector.y, starVector.z);
 		}
+		
 	}
 }
 
