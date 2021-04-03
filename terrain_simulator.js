@@ -52,7 +52,7 @@ class Player
 	rotateMouse(deltaX, deltaY)
 	{
 		this.rotX+=deltaX;
-		this.rotY+=deltaY;
+		this.rotY=constrain(this.rotY+deltaY,-Math.PI/2, Math.PI/2);
 	}
 	renderCamera()
 	{
@@ -241,9 +241,9 @@ function draw()
 
 function mouseDragged()
 {
-	const mult= 0.01;
-	let delta_x=(mouseX - pmouseX) * 0.01;
-	let delta_y=(mouseY - pmouseY) * 0.01;
+	const mult= height < width ? height : width;
+	let delta_x=(mouseX - pmouseX) / mult;
+	let delta_y=(mouseY - pmouseY) / mult;
 	player.rotateMouse(delta_x, delta_y);
 }
 
