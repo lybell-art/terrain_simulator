@@ -405,6 +405,7 @@ function draw()
 	const pos=player.getPos();
 //	tr.render(pos.x, pos.z);
 	tr._renderBiome(0,0,0.95,0);
+	tr._renderBiome(1,0,0.95,10);
 }
 
 
