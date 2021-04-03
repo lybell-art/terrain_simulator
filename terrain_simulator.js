@@ -415,11 +415,6 @@ class TerrainRenderer
 		}
 	}
 }
-let mandel;
-function preload() {
-  // load the shader definitions from files
-  mandel = loadShader('shader/vert.glsl', 'shader/frag.glsl');
-}
 function setup()
 {
 	let myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
@@ -429,7 +424,6 @@ function setup()
 	tr=new TerrainRenderer(16);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
-	shader(mandel);
 }
 
 function draw()
