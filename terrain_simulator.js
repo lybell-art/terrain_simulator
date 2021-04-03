@@ -157,6 +157,7 @@ class SavannaRenderer extends ChunkRenderer
 class DesertRenderer extends ChunkRenderer
 {
 	static _plain_color = "#ebc6a0";
+	static _ocean_color = "#43eec8";
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
@@ -164,15 +165,9 @@ class DesertRenderer extends ChunkRenderer
 		else if(_type < 7) this.type=1;
 		else this.type=2;
 	}
-	_plainDraw()
-	{
-		const _y = this.y;
-		fill(DesertRenderer._plain_color);
-		super._plainPillar(_y);
-	}
 	render()
 	{
-		this._plainDraw();
+		super._plainDraw(DesertRenderer._plain_color, DesertRenderer._ocean_color);
 	}
 }
 
