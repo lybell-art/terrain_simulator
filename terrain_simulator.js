@@ -504,6 +504,7 @@ function draw()
 function mobile_cameraMove()
 {
 	const mult= height < width ? height : width;
+	console.log("Hey!");
 	let delta_x=(mouseX - pmouseX) / mult;
 	let delta_y=(mouseY - pmouseY) / mult;
 	player.rotateCamera_mobile(delta_x, delta_y);
