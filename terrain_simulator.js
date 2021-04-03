@@ -196,7 +196,7 @@ class TerrainRenderer
 	}
 	_renderBiome(x, z, chunk, altitude)
 	{
-		const biome=this._getBiome(chunk);
+		let biome=this._getBiome(chunk);
 		const biome_hidden=this._getBiomeType(chunk);
 		new biome(x,z,biome_hidden,altitude).render();
 	}
