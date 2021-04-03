@@ -84,7 +84,7 @@ class ChunkRenderer
 		pop();
 	}
 }
-class SnowyTaigaRenderer
+class SnowyTaigaRenderer extends ChunkRenderer
 {
 	static _plain_color = color(240,252,255);
 	static _ocean_color = color(57, 56, 201);
@@ -100,7 +100,7 @@ class SnowyTaigaRenderer
 		super._plainDraw(SnowyTaigaRenderer._plain_color, SnowyTaigaRenderer._ocean_color);
 	}
 }
-class TaigaRenderer
+class TaigaRenderer extends ChunkRenderer
 {
 	static _plain_color = color(61, 175, 126);
 	static _ocean_color = color(58, 112, 218);
@@ -116,7 +116,7 @@ class TaigaRenderer
 		super._plainDraw(TaigaRenderer._plain_color, TaigaRenderer._ocean_color);
 	}
 }
-class PlainRenderer
+class PlainRenderer extends ChunkRenderer
 {
 	static _plain_color = color(110, 189, 89);
 	static _ocean_color = color(69, 173, 242);
@@ -132,7 +132,7 @@ class PlainRenderer
 		super._plainDraw(PlainRenderer._plain_color, PlainRenderer._ocean_color);
 	}
 }
-class SavannaRenderer
+class SavannaRenderer extends ChunkRenderer
 {
 	static _plain_color = color(172, 183, 101);
 	static _ocean_color = color(67, 238, 200);
@@ -147,7 +147,7 @@ class SavannaRenderer
 		super._plainDraw(SavannaRenderer._plain_color, SavannaRenderer._ocean_color);
 	}
 }
-class DesertRenderer
+class DesertRenderer extends ChunkRenderer
 {
 	static _plain_color = color(235,198,160);
 	constructor(_x, _z, _type, _y)
