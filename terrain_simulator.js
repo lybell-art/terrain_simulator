@@ -449,14 +449,16 @@ function skyRender(x,y,z)
 	const t=getHours();
 	if(!between(t,6,18))
 	{
-		fill(215,240,255,parseInt(constrain(cycle(t*t,-18,24),0,1)*255));
-		for(var i=0;i<90;i++)
+		if(cycle(t,-18,24)>1)
 		{
-			let theta=map(noise(t,i-7560),0,1,-Math.PI*2.2,Math.PI*2.2);
-			let phi=map(noise(t,i+9234),0,1,-Math.PI*90/180,Math.PI/6);
-			let starVector=SCS_to_OCS(1000,theta,phi);
-			starVector.add(x,y,z);
-			drawStar(starVector.x, starVector.y, starVector.z);
+			for(var i=0;i<90;i++)
+			{
+				let theta=map(noise(t,i-7560),0,1,-Math.PI*2.2,Math.PI*2.2);
+				let phi=map(noise(t,i+9234),0,1,-Math.PI*90/180,Math.PI/6);
+				let starVector=SCS_to_OCS(1000,theta,phi);
+				starVector.add(x,y,z);
+				drawStar(starVector.x, starVector.y, starVector.z);
+			}
 		}
 		drawSun(x,y,z,map(cycle(t,-18,24),0,12,0,Math.PI),"#FFDC96", 20);
 	}
