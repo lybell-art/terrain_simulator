@@ -67,6 +67,10 @@ class Player
 		let realDir=new p5.Vector(dir.x*this.moveSpeed, 0, dir.z*this.moveSpeed);
 		this.pos.add(realDir);
 	}
+	altitude(upDown)
+	{
+		this.pos.y -= upDown*this.moveSpeed;
+	}
 	renderCamera()
 	{
 		let lookAt=SCS_to_OCS(this.baseDist,this.rotX,this.rotY);
@@ -239,7 +243,7 @@ function setup()
 	if(IS_MOBILE) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
 	player.startCamera();
-	tr=new TerrainRenderer();
+	tr=new TerrainRenderer(32);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
 }
@@ -255,6 +259,8 @@ function draw()
 	if (keyIsDown(DOWN_ARROW)) player.move(0);
 	if (keyIsDown(LEFT_ARROW)) player.move(-PI/2);
 	if (keyIsDown(RIGHT_ARROW)) player.move(PI/2);
+	if (keyIsDown(' ')) player.altitude(1);
+	if (keyIsDown(SHIFT)) player.altitude(-1);
 	
 	player.renderCamera();
 	const pos=player.getPos();
