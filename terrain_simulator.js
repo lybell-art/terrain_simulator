@@ -46,7 +46,7 @@ function drawStar(x, y, z)
 		vertex(i*r,r,r);vertex(i*3*r,0,0);vertex(i*r,r,-r);
 		vertex(i*r,r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,-r);
 		vertex(i*r,-r,-r);vertex(i*3*r,0,0);vertex(i*r,-r,r);
-		vertex(i*r,-r,r);vertex(i*3*r.0,0);vvertex(i*r,r,r);
+		vertex(i*r,-r,r);vertex(i*3*r,0,0);vvertex(i*r,r,r);
 	}
 	endShape();
 	pop();
