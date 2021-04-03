@@ -198,6 +198,7 @@ class TerrainRenderer
 	{
 		let biome=this._getBiome(chunk);
 		const biome_hidden=this._getBiomeType(chunk);
+		console.log(biome);
 		new biome(x,z,biome_hidden,altitude).render();
 	}
 	render(cx,cz)
