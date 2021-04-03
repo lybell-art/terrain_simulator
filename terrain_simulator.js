@@ -6,11 +6,6 @@ function between(input, a, b)
 	return a<=input && input<=b;
 }
 
-function map(input, min, max, nmin, nmax)
-{
-	return (input-min)*(nmax-nmin)/(max-min);
-}
-
 function changeBG() //The background color changes according to the real time
 {
 	const today = new Date();
@@ -18,17 +13,18 @@ function changeBG() //The background color changes according to the real time
 	let t = (today.getTime() + offset)  / 86400000;
 	t= ( t - Math.floor(t) ) * 24;
 	let col;
-	if(between(t,8,13)) col=lerpColor("#D3EDFF", "#53B9FF", map(t, 8, 13, 0, 1));
-	else if(between(t,13,18)) col=lerpColor("#53B9FF", "#E1EAED", map(t, 13, 18, 0, 1));
-	else if(between(t,18,18.5)) col=lerpColor("#E1EAED", "#FAC275", map(t, 18, 18.5, 0, 1));
-	else if(between(t,18.5,19)) col=lerpColor("#FAC275", "#FA6F6E", map(t, 18.5, 19, 0, 1));
-	else if(between(t,19,20)) col=lerpColor("#FA6F6E", "#483E8C", map(t, 19, 20, 0, 1));
-	else if(between(t,20,24)) col=lerpColor("#483E8C", "#142740", map(t, 20, 24, 0, 1));
+	let myLerpColor=function(t, col1, col2, time1, time2){return lerpColor(color(col1), color(col2), map(t, time1, time2, 0, 1));}
+	if(between(t,8,13)) col=myLerpColor(t, "#D3EDFF", "#53B9FF", 8, 13);
+	else if(between(t,13,18)) col=myLerpColor(t, "#53B9FF", "#E1EAED", 13, 18);
+	else if(between(t,18,18.5)) col=myLerpColor(t, "#E1EAED", "#FAC275", 18, 18.5);
+	else if(between(t,18.5,19)) col=myLerpColor(t, "#FAC275", "#FA6F6E", 18.5, 19);
+	else if(between(t,19,20)) col=myLerpColor(t, "#FA6F6E", "#483E8C", 19, 20);
+	else if(between(t,20,24)) col=myLerpColor(t, "#483E8C", "#142740", 20, 24);
 	else if(between(t,0,5)) col=color("#142740");
-	else if(between(t,5,6)) col=lerpColor("#142740", "#8F77F3", map(t, 5, 6, 0, 1));
-	else if(between(t,6,6.5)) col=lerpColor("#8F77F3", "#FDABB5", map(t, 6, 6.5, 0, 1));
-	else if(between(t,6.5,7)) col=lerpColor("#FDABB5", "#F5E6CB", map(t, 6.5, 7, 0, 1));
-	else col=lerpColor("#F5E6CB", "#D3EDFF", map(t, 7, 8, 0, 1));
+	else if(between(t,5,6)) col=myLerpColor(t, "#142740", "#8F77F3", 5, 6);
+	else if(between(t,6,6.5)) col=myLerpColor(t, "#8F77F3", "#FDABB5", 6, 6.5);
+	else if(between(t,6.5,7)) col=myLerpColor(t, "#FDABB5", "#F5E6CB", 6.5, 7);
+	else col=myLerpColor(t, "#F5E6CB", "#D3EDFF", 7, 8);
 	
 	background(col);
 }
