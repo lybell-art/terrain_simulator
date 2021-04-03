@@ -221,18 +221,15 @@ class TerrainRenderer
 function setup()
 {
 	createCanvas(windowWidth,windowHeight,WEBGL);
-//	player=new Player(0,0);
-//	player.startCamera();
+	player=new Player(0,0);
+	player.startCamera();
 	tr=new TerrainRenderer();
 }
 
 function draw()
 {
 	changeBG();
-//	player.renderCamera();
-//	const pos=player.getPos();
-//	tr.render(0,0);
-//	box(40);
-	let a=new SnowyTaigaRenderer(2,2,2,3);
-	a.render();
+	player.renderCamera();
+	const pos=player.getPos();
+	tr.render(0,0);
 }
