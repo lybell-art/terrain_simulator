@@ -470,7 +470,11 @@ let myCanvas;
 function setup()
 {
 	myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
-	if(IS_MOBILE > 0 || IS_MOBILE === true) myCanvas.touchMoved(mobile_cameraMove);
+	if(IS_MOBILE > 0 || IS_MOBILE === true)
+	{
+		myCanvas.touchMoved(mobile_cameraMove);
+		myCanvas.touchEnded(buttonReset);
+	}
 	player=new Player(0,0);
 	player.startCamera();
 	tr=new TerrainRenderer((!IS_MOBILE) ? 20 : 8);
@@ -499,16 +503,6 @@ function draw()
 	
 	emissiveMaterial(215,240,255);
 	skyRender(player.pos.x, player.pos.y, player.pos.z);
-	if(!!IS_MOBILE)
-	{
-		const vKeyID=["up", "down","left","right"];
-		for(var i=0;i<4;i++)
-		{
-			let b=document.getElementById(vKeyID);
-			if(virtualkeys[i]) b.classList.add('on');
-			else  b.classList.remove('on');
-		}
-	}
 	virtualkeys=[false,false,false,false];
 }
 
@@ -539,6 +533,23 @@ function mobile_cameraMove()
 		else if(between(heading,-Math.PI*1/4, Math.PI*1/4)) virtualkeys[3]=true;
 		else if(between(heading,Math.PI*1/4, Math.PI*3/4)) virtualkeys[1]=true;
 		else virtualkeys[2]=true;
+		const vKeyID=["up", "down","left","right"];
+		for(var i=0;i<4;i++)
+		{
+			let b=document.getElementById(vKeyID);
+			if(virtualkeys[i]) b.classList.add('on');
+			else  b.classList.remove('on');
+		}
+	}
+}
+
+function buttonReset()
+{
+	const vKeyID=["up", "down","left","right"];
+	for(var i=0;i<4;i++)
+	{
+		let b=document.getElementById(vKeyID);
+		b.classList.remove('on');
 	}
 }
 
