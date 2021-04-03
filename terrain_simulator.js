@@ -422,10 +422,10 @@ function skyRender(x,y,z)
 	const t=getHours();
 	if(!between(t,6,19))
 	{
-		for(var i=0;i<60;i++)
+		for(var i=0;i<80;i++)
 		{
 			let theta=map(noise(t,i-7560),0,1,-Math.PI*2,Math.PI*2);
-			let phi=map(noise(t,i+9234),0,1,-Math.PI/3,Math.PI/6);
+			let phi=map(noise(t,i+9234),0,1,-Math.PI*75/180,Math.PI/6);
 			let starVector=SCS_to_OCS(1000,theta,phi);
 			starVector.add(player.pos);
 			drawStar(starVector.x, starVector.y, starVector.z);
