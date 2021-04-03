@@ -187,7 +187,7 @@ class TerrainRenderer
 		else if(between(noise,0.1,0.3)) return TaigaRenderer;
 		else if(between(noise,0.3,0.6)) return PlainRenderer;
 		else if(between(noise,0.6,0.8)) return SavannaRenderer;
-		else if(between(noise,0.8,1)) return DesertRenderer;
+		else return DesertRenderer;
 	}
 	_getBiomeType(noise)
 	{
