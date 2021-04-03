@@ -504,7 +504,7 @@ function draw()
 		const vKeyID=["up", "down","left","right"];
 		for(var i=0;i<4;i++)
 		{
-			let b=document.getElementById(vKeyID)[0];
+			let b=document.getElementById(vKeyID);
 			if(virtualkeys[i]) b.classList.add('on');
 			else  b.classList.remove('on');
 		}
