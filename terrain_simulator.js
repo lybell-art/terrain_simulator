@@ -6,6 +6,11 @@ function between(input, a, b)
 	return a<=input && input<=b;
 }
 
+function map(input, min, max, nmin, nmax)
+{
+	return (input-min)*(nmax-nmin)/(max-min);
+}
+
 function changeBG() //The background color changes according to the real time
 {
 	const today = new Date();
