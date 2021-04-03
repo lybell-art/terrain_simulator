@@ -45,6 +45,7 @@ class Player
 		this.baseDist=height / 2 / tan((30 * PI) / 180);
 		this.rotX=0;
 		this.rotY=0;
+		this.moveSpeed=4;
 	}
 	startCamera()
 	{
@@ -59,6 +60,12 @@ class Player
 	{
 		this.rotX-=deltaX;
 		this.rotY=constrain(this.rotY+deltaY,-Math.PI/2, Math.PI/2);
+	}
+	move(forhead, side)
+	{
+		let dir=new p5.Vector(Math.sin(this.rotX), 0, Math.cos(this.rotX));
+		let realDir=new p5.Vector(dir.x*side*this.moveSpeed, 0, dir.z*forhead*this.moveSpeed);
+		this.pos.add(realDir);
 	}
 	renderCamera()
 	{
@@ -210,7 +217,7 @@ class TerrainRenderer
 	}
 	render(cx,cz)
 	{
-		const noiseScale=0.02;
+		const noiseScale=0.04;
 		const landFactor= 78329;
 		const oceanFactor= 993217;
 		let N=this.chunkAmount;
@@ -220,7 +227,7 @@ class TerrainRenderer
 			{
 				let chunk_noise=noise((x+cx)*noiseScale+landFactor, (z+cz)*noiseScale +landFactor);
 				let y_noise=noise((x+cx)*noiseScale +oceanFactor, (z+cz)*noiseScale +oceanFactor);
-				y_noise=map(y_noise,0,1,-50, 150);
+				y_noise=map(y_noise,0,1,-100, 250);
 				this._renderBiome(x, z, chunk_noise, y_noise);
 			}
 		}
@@ -243,6 +250,12 @@ function draw()
 	directionalLight(240, 240, 240, 0.2, 1, 0.2);
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
+
+	if (keyIsDown(UP_ARROW)) player.move(1, 0);
+	if (keyIsDown(DOWN_ARROW)) player.move(-1, 0);
+	if (keyIsDown(LEFT_ARROW)) player.move(0, -1);
+	if (keyIsDown(RIGHT_ARROW)) player.move(0, 1);
+	
 	player.renderCamera();
 //	const pos=player.getPos();
 	tr.render(0,0);
