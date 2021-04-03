@@ -27,7 +27,7 @@ function getHours()
 
 function drawStar(x, y, z)
 {
-	const r=5;
+	const r=2;
 	push();
 	translate(x,y,z);
 	beginShape(TRIANGLES);
@@ -425,7 +425,7 @@ function skyRender(x,y,z)
 		for(var i=0;i<60;i++)
 		{
 			let theta=map(noise(t,i-7560),0,1,-Math.PI,Math.PI);
-			let phi=map(noise(t,i+9234),0,1,0,Math.PI);
+			let phi=map(noise(t,i+9234),0,1,-Math.PI,0);
 			let starVector=SCS_to_OCS(1000,theta,phi);
 			starVector.add(player.pos);
 			drawStar(starVector.x, starVector.y, starVector.z);
