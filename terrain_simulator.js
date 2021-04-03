@@ -305,12 +305,12 @@ class DesertRenderer extends ChunkRenderer
 	}
 	_treeDraw(_x,_z)
 	{
-		const trunkR=CHUNK_RADIUS/8;
+		const trunkR=CHUNK_RADIUS/16;
 		const trunkH=CHUNK_RADIUS*3/16;
 		push();
 		translate(_x,-(this.y+trunkH)/2,_z);
 		fill("#acc764");
-		cylinder(trunkR, trunkH, 6, 1);
+		cylinder(trunkR, trunkH, 8, 1);
 		translate(0,-trunkH/2,0);
 		sphere(trunkR, 8, 6);
 		pop();
