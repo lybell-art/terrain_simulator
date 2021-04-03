@@ -86,8 +86,8 @@ class ChunkRenderer
 }
 class SnowyTaigaRenderer extends ChunkRenderer
 {
-	static _plain_color = color(240,252,255);
-	static _ocean_color = color(57, 56, 201);
+	static _plain_color = "#f0fcff";
+	static _ocean_color = "#3938c9";
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
@@ -102,8 +102,8 @@ class SnowyTaigaRenderer extends ChunkRenderer
 }
 class TaigaRenderer extends ChunkRenderer
 {
-	static _plain_color = color(61, 175, 126);
-	static _ocean_color = color(58, 112, 218);
+	static _plain_color = "#3daf7e";
+	static _ocean_color = "#3a70da";
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
@@ -118,8 +118,8 @@ class TaigaRenderer extends ChunkRenderer
 }
 class PlainRenderer extends ChunkRenderer
 {
-	static _plain_color = color(110, 189, 89);
-	static _ocean_color = color(69, 173, 242);
+	static _plain_color = "#6ebd59";
+	static _ocean_color = "#45adf2";
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
@@ -134,8 +134,8 @@ class PlainRenderer extends ChunkRenderer
 }
 class SavannaRenderer extends ChunkRenderer
 {
-	static _plain_color = color(172, 183, 101);
-	static _ocean_color = color(67, 238, 200);
+	static _plain_color = "#acb765";
+	static _ocean_color = "#43eec8";
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
@@ -149,7 +149,7 @@ class SavannaRenderer extends ChunkRenderer
 }
 class DesertRenderer extends ChunkRenderer
 {
-	static _plain_color = color(235,198,160);
+	static _plain_color = "#ebc6a0";
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
