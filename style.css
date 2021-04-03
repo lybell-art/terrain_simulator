@@ -4,14 +4,14 @@
   width: 30vw;
   height: 30vw;
   background-size: contain;
-  display:fixed;
+  position:fixed;
 }
 
 .virtual_button div{
   width: 100%;
   height: 100%;
   background-size: contain;
-  display:fixed;
+  position:fixed;
 }
 
 #up{
