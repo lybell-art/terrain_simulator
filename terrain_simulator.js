@@ -15,12 +15,18 @@ function frand(x,y)
 	return fract(Math.sin(x * 9106.966345 + y * 3742.931314) * 49824.21294);
 }
 
-function changeBG() //The background color changes according to the real time
+function getHours()
 {
 	const today = new Date();
 	const offset= -today.getTimezoneOffset() * 60000;
 	let t = (today.getTime() + offset)  / 86400000;
 	t= fract(t) * 24;
+	return t;
+}
+
+function changeBG() //The background color changes according to the real time
+{
+	let t=getHours();
 	let col;
 	let myLerpColor=function(col1, col2, time1, time2){return lerpColor(color(col1), color(col2), map(t, time1, time2, 0, 1));}
 	if(between(t,8,13)) col=myLerpColor("#D3EDFF", "#53B9FF", 8, 13);
@@ -37,6 +43,17 @@ function changeBG() //The background color changes according to the real time
 	else col=myLerpColor("#F5E6CB", "#D3EDFF", 7, 8);
 	
 	background(col);
+}
+
+function changeLight()
+{
+	let t=getHours();
+	if(between(t,6,19)) directionalLight(250, 250, 250, 0.2, 1, 0.2);
+	else
+	{
+		directionalLight(30, 30, 30, 0.2, 1, 0.2);
+		ambientLight(15, 10, 40);
+	}
 }
 
 function SCS_to_OCS(radius, xRot, yRot)
@@ -385,9 +402,7 @@ function setup()
 function draw()
 {
 	lights();
-//	directionalLight(240, 240, 240, 0.2, 1, 0.2);
-	directionalLight(30, 30, 30, -0.2, 1, -0.2);
-	ambientLight(10, 15, 60);
+	changeLight();
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
 
