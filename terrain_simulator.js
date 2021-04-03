@@ -225,11 +225,9 @@ class PlainRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		/*
 		if(_type < 3) this.type=0;
 		else if(_type < 6) this.type=1;
 		else this.type=2;
-		*/
 		this.type=2;
 	}
 	_treeDraw(_x,_z)
@@ -256,8 +254,10 @@ class SavannaRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
+		/*
 		if(_type < 6) this.type=0;
 		else this.type=1;
+		*/
 	}
 	_treeDraw(_x,_z)
 	{
