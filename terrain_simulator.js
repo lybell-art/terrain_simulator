@@ -63,6 +63,7 @@ class Player
 
 class ChunkRenderer
 {
+	static _below=100;
 	constructor(_x, _z, _type, _y)
 	{
 		this.start_x=_x*CHUNK_RADIUS;
@@ -72,18 +73,22 @@ class ChunkRenderer
 		this.type=0;
 		this.y=_y;
 	}
+	_plainPillar(_y)
+	{
+		const mid_x = (this.start_x + this.end_x) /2;
+		const mid_z = (this.start_z + this.end_z) /2;
+		const BELOW=100;
+		push();
+		translate(mid_x, (BELOW-_y)/2, mid_z);
+		box(CHUNK_RADIUS, BELOW+_y, CHUNK_RADIUS);
+		pop();
+	}
 	_plainDraw(plainCol, oceanCol)
 	{
 		const _y = (this.y < 0 ? 0 : this.y);
-		const mid_x = (this.start_x + this.end_x) /2;
-		const mid_z = (this.start_z + this.end_z) /2;
-		push();
 		if(this.y<0) fill(oceanCol);
 		else fill(plainCol);
-		translate(mid_x, -(1+_y)/2, mid_z);
-		box(CHUNK_RADIUS, (1+_y), CHUNK_RADIUS);
-		pop();
-		console.log(_y);
+		this._plainPillar(_y);
 	}
 }
 class SnowyTaigaRenderer extends ChunkRenderer
@@ -162,13 +167,8 @@ class DesertRenderer extends ChunkRenderer
 	_plainDraw()
 	{
 		const _y = this.y;
-		const mid_x = (this.start_x + this.end_x) /2;
-		const mid_z = (this.start_z + this.end_z) /2;
-		push();
 		fill(DesertRenderer._plain_color);
-		translate(mid_x, (1000+_y)/2, mid_z);
-		box(CHUNK_RADIUS, -(1000+_y), CHUNK_RADIUS);
-		pop();
+		super._plainPillar(_y);
 	}
 	render()
 	{
