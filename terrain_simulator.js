@@ -385,6 +385,10 @@ function setup()
 	tr=new TerrainRenderer(16);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
+	let vs=FSS.WebGLRenderer.VS(250);
+	let fs=FSS.WebGLRenderer.FS(250);
+	let myShader=createShader(vs,fs);
+	shader(myShader);
 }
 
 function draw()
