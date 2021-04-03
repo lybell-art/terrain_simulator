@@ -113,8 +113,8 @@ class ChunkRenderer
 		push();
 		translate(mid_x, (BELOW-_y)/2, mid_z);
 		box(CHUNK_RADIUS, BELOW+_y, CHUNK_RADIUS);
-		translate(mid_x, _y-0.5, mid_z);
-		box(CHUNK_RADIUS, 1, CHUNK_RADIUS);
+//		translate(mid_x, _y-0.5, mid_z);
+//		box(CHUNK_RADIUS, 1, CHUNK_RADIUS);
 		pop();
 	}
 	_plainDraw(plainCol, oceanCol)
