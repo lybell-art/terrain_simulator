@@ -230,10 +230,12 @@ function setup()
 	mainCamera.setPosition(330,-480,580);
 	mainCamera.lookAt(0,-50,0);
 	noLoop();
+	noStroke();
 }
 
 function draw()
 {
+	lights();
 	changeBG();
 //	player.renderCamera();
 //	const pos=player.getPos();
