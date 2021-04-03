@@ -24,7 +24,8 @@ function changeBG() //The background color changes according to the real time
 	let col;
 	let myLerpColor=function(col1, col2, time1, time2){return lerpColor(color(col1), color(col2), map(t, time1, time2, 0, 1));}
 	if(between(t,8,13)) col=myLerpColor("#D3EDFF", "#53B9FF", 8, 13);
-	else if(between(t,13,18)) col=myLerpColor("#53B9FF", "#E1EAED", 13, 18);
+	else if(between(t,13,17)) col=color("#53B9FF");
+	else if(between(t,17,18)) col=myLerpColor("#53B9FF", "#E1EAED", 17, 18);
 	else if(between(t,18,18.5)) col=myLerpColor("#E1EAED", "#FAC275", 18, 18.5);
 	else if(between(t,18.5,19)) col=myLerpColor("#FAC275", "#FA6F6E", 18.5, 19);
 	else if(between(t,19,20)) col=myLerpColor("#FA6F6E", "#483E8C", 19, 20);
@@ -195,10 +196,9 @@ class TaigaRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
-		/*
 		if(_type < 2) this.type=0;
 		else if(_type < 4) this.type=1;
-		else this.type=2;*/
+		else this.type=2;
 		this.type=2;
 	}
 	_treeDraw(_x,_z)
@@ -225,9 +225,12 @@ class PlainRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
+		/*
 		if(_type < 3) this.type=0;
 		else if(_type < 6) this.type=1;
 		else this.type=2;
+		*/
+		this.type=2;
 	}
 	_treeDraw(_x,_z)
 	{
@@ -400,7 +403,7 @@ function draw()
 	player.renderCamera();
 	const pos=player.getPos();
 //	tr.render(pos.x, pos.z);
-	tr._renderBiome(0,0,0.2,0);
+	tr._renderBiome(0,0,0.5,0);
 }
 
 
