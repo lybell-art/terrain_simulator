@@ -497,7 +497,7 @@ function draw()
 	
 	emissiveMaterial(215,240,255);
 	skyRender(player.pos.x, player.pos.y, player.pos.z);
-	console.log(dist(mouseX, mouseY, 80+ 0.15*width, height-80-0.15*width) <= 0.157*width);
+	console.log(dist(mouseX, mouseY, 80+ 0.15*width, height-80-0.15*width) <= 0.15*width);
 }
 
 
