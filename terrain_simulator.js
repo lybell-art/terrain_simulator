@@ -1,5 +1,5 @@
 let player, tr;
-let pTouchX, pTouchY;
+let virtualkeys=[false, false, false, false];
 const CHUNK_RADIUS=64;
 //const IS_MOBILE=('ontouchstart' in document.documentElement);
 const IS_MOBILE=(navigator.maxTouchPoints || 'ontouchstart' in document.documentElement);
@@ -486,10 +486,10 @@ function draw()
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
 
-	if (keyIsDown(UP_ARROW) || keyIsDown(87)) player.move(PI);
-	if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) player.move(0);
-	if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) player.move(-PI/2);
-	if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) player.move(PI/2);
+	if (keyIsDown(UP_ARROW) || keyIsDown(87) || virtualkeys[0]) player.move(PI);
+	if (keyIsDown(DOWN_ARROW) || keyIsDown(83) ||virtualkeys[1]) player.move(0);
+	if (keyIsDown(LEFT_ARROW) || keyIsDown(65) || virtualkeys[2]) player.move(-PI/2);
+	if (keyIsDown(RIGHT_ARROW) || keyIsDown(68) || virtualkeys[3]) player.move(PI/2);
 	if (keyIsDown(32)) player.altitude(1);
 	if (keyIsDown(SHIFT)) player.altitude(-1);
 	
@@ -499,17 +499,47 @@ function draw()
 	
 	emissiveMaterial(215,240,255);
 	skyRender(player.pos.x, player.pos.y, player.pos.z);
+	if(!!IS_MOBILE)
+	{
+		const vKeyID=["up", "down","left","right"];
+		for(var i=0;i<4;i++)
+		{
+			let b=document.getElementById(vKeyID)[0];
+			if(virtualkeys[i]) b.classList.add('on');
+			else  b.classList.remove('on');
+		}
+	}
+	virtualkeys=[false,false,false,false];
 }
 
 //dist(mouseX, mouseY, 80+ 0.15*width, height-80-0.15*width) <= 0.15*width
 
+function mobile_inButton()
+{
+	return dist(mouseX, mouseY, 80+ 0.15*width, height-80-0.15*width) <= 0.15*width ;
+}
+
 function mobile_cameraMove()
 {
 	const mult= height < width ? height : width;
-	console.log(pmouseX);
-	let delta_x=(mouseX - pmouseX) / mult;
-	let delta_y=(mouseY - pmouseY) / mult;
-	player.rotateCamera_mobile(delta_x, delta_y);
+	if(!mobile_inButton())
+	{
+		let delta_x=(mouseX - pmouseX) / mult;
+		let delta_y=(mouseY - pmouseY) / mult;
+		player.rotateCamera_mobile(delta_x, delta_y);
+	}
+	else
+	{
+		let vect1=createVector(mouseX, mouseY);
+		let vect2=createVector(80+ 0.15*width, height-80-0.15*width);
+		let vect3=p5.Vector.sub(vect1,vect2);
+		let heading=vect3.heading();
+		virtualkeys=[false,false,false,false];
+		if(between(heading,-Math.PI*3/4, -Math.PI*1/4)) virtualkeys[0]=true;
+		else if(between(heading,-Math.PI*1/4, Math.PI*1/4)) virtualkeys[3]=true;
+		else if(between(heading,Math.PI*1/4, Math.PI*3/4)) virtualkeys[1]=true;
+		else virtualkeys[2]=true;
+	}
 }
 
 
