@@ -303,7 +303,7 @@ class DesertRenderer extends ChunkRenderer
 			let pyramidZ=frand(this.start_z, this.typeSeed*32);
 			pyramidX=this.start_x+pyramidX*CHUNK_RADIUS;
 			pyramidZ=this.start_z+pyramidZ*CHUNK_RADIUS;
-			this.pyramidDraw(pyramidX,pyramidZ);
+			this._pyramidDraw(pyramidX,pyramidZ);
 		}
 		else if(this.type ==2) this._treeScatter(3);
 	}
