@@ -468,7 +468,7 @@ function setup()
 	if(IS_MOBILE) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
 	player.startCamera();
-	tr=new TerrainRenderer(16);
+	tr=new TerrainRenderer(40);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
 }
