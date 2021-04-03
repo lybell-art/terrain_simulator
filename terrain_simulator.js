@@ -39,7 +39,7 @@ class Player
 	constructor(x,y)
 	{
 		this.camera=createCamera();
-		this.pos=new p5.Vector(x,y,100);
+		this.pos=new p5.Vector(x,y,-400);
 		this.baseDist=height / 2 / tan((30 * PI) / 180);
 		this.rotX=0;
 		this.rotY=0;
@@ -203,7 +203,7 @@ class TerrainRenderer
 	}
 	render(cx,cz)
 	{
-		const noiseScale=0.01;
+		const noiseScale=0.1;
 		const oceanFactor= 993217;
 		let N=this.chunkAmount;
 		for(var z=-N; z<=N; z++)
@@ -212,7 +212,7 @@ class TerrainRenderer
 			{
 				let chunk_noise=noise((x+cx)*noiseScale, (z+cz)*noiseScale);
 				let y_noise=noise((x+cx)*noiseScale +oceanFactor, (z+cz)*noiseScale +oceanFactor);
-				y_noise=map(y_noise,0,1,-5, 20);
+				y_noise=map(y_noise,0,1,-50, 200);
 				this._renderBiome(x, z, chunk_noise, y_noise);
 			}
 		}
