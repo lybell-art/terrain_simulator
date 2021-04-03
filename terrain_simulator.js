@@ -287,9 +287,12 @@ class DesertRenderer extends ChunkRenderer
 	constructor(_x, _z, _type, _y)
 	{
 		super(_x, _z, _type, _y);
+		/*
 		if(_type < 4) this.type=0;
 		else if(_type < 7) this.type=1;
 		else this.type=2;
+		*/
+		this.type=1;
 	}
 	_pyramidDraw(_x, _z)
 	{
@@ -401,7 +404,7 @@ function draw()
 	player.renderCamera();
 	const pos=player.getPos();
 //	tr.render(pos.x, pos.z);
-	tr._renderBiome(0,0,0.7,0);
+	tr._renderBiome(0,0,0.95,0);
 }
 
 
