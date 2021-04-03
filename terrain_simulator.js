@@ -232,7 +232,7 @@ function draw()
 //	player.renderCamera();
 //	const pos=player.getPos();
 //	tr.render(0,0);
-	box(40);
-	let a=new SnowyTaigaRenderer(0,0,2,3);
+//	box(40);
+	let a=new SnowyTaigaRenderer(2,2,2,3);
 	a.render();
 }
