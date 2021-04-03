@@ -80,8 +80,8 @@ class ChunkRenderer
 		push();
 		if(this.y<0) fill(oceanCol);
 		else fill(plainCol);
-		translate(mid_x, (1+_y)/2, mid_z);
-		box(CHUNK_RADIUS, -(1+_y), CHUNK_RADIUS);
+		translate(mid_x, -(1+_y)/2, mid_z);
+		box(CHUNK_RADIUS, (1+_y), CHUNK_RADIUS);
 		pop();
 		console.log(_y);
 	}
