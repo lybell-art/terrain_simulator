@@ -45,7 +45,7 @@ class Player
 		this.baseDist=height / 2 / tan((30 * PI) / 180);
 		this.rotX=0;
 		this.rotY=0;
-		this.moveSpeed=4;
+		this.moveSpeed=8;
 	}
 	startCamera()
 	{
@@ -192,9 +192,9 @@ class DesertRenderer extends ChunkRenderer
 
 class TerrainRenderer
 {
-	constructor()
+	constructor(amount = 16)
 	{
-		this.chunkAmount=12;
+		this.chunkAmount=amount;
 	}
 	_getBiome(noise)
 	{
