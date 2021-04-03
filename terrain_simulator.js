@@ -228,7 +228,7 @@ class TerrainRenderer
 				let chunk_noise=noise((x+cx)*noiseScale+landFactor, (z+cz)*noiseScale +landFactor);
 				let y_noise=noise((x+cx)*noiseScale +oceanFactor, (z+cz)*noiseScale +oceanFactor);
 				y_noise=map(y_noise,0,1,-100, 250);
-				this._renderBiome(x, z, chunk_noise, y_noise);
+				this._renderBiome(x+cx, z+cz, chunk_noise, y_noise);
 			}
 		}
 	}
@@ -251,8 +251,8 @@ function draw()
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
 
-	if (keyIsDown(UP_ARROW)) player.move(0);
-	if (keyIsDown(DOWN_ARROW)) player.move(PI);
+	if (keyIsDown(UP_ARROW)) player.move(PI);
+	if (keyIsDown(DOWN_ARROW)) player.move(0);
 	if (keyIsDown(LEFT_ARROW)) player.move(-PI/2);
 	if (keyIsDown(RIGHT_ARROW)) player.move(PI/2);
 	
