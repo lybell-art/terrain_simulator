@@ -381,7 +381,7 @@ function setup()
 	let myCanvas=createCanvas(windowWidth,windowHeight,WEBGL);
 	if(IS_MOBILE) myCanvas.touchMoved(mobile_cameraMove);
 	player=new Player(0,0);
-	player.startCamera();
+//	player.startCamera();
 	tr=new TerrainRenderer(16);
 	noStroke();
 	mouseX=width/2, mouseY=height/2;
@@ -405,10 +405,11 @@ function draw()
 	if (keyIsDown(32)) player.altitude(1);
 	if (keyIsDown(SHIFT)) player.altitude(-1);
 	
-	player.renderCamera();
-	const pos=player.getPos();
+//	player.renderCamera();
+//	const pos=player.getPos();
 //	tr.render(pos.x, pos.z);
-	tr._renderBiome(0,0,0.95,0);
+//	tr._renderBiome(0,0,0.95,0);
+	box(100);
 }
 
 
