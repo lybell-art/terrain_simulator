@@ -172,7 +172,7 @@ class SnowyTaigaRenderer extends ChunkRenderer
 		translate(0,-trunkH*2/3,0);
 		fill("#1a7d56");
 		cone(trunkR*3, -trunkH, 12, 1);
-		translate(0,-trunkH*2/3,0);
+		translate(0,-trunkH/2,0);
 		fill("#c8edf7");
 		cone(trunkR*3, -trunkH, 12, 1);
 		pop();
