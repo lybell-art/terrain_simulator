@@ -443,8 +443,8 @@ function skyRender(x,y,z)
 		{
 			
 //			let moon_theta=map(cycle(t,-18,24),0,12,0,Math.PI);
-			let moon_theta=i/90*Math.PI;
-			let moon_tilt=Math.PI*50/180;
+			let moon_theta=0;
+			let moon_tilt=Math.PI*60/180;
 			let moonVector=revolve_to_OCS(1000,moon_theta,moon_tilt);
 			moonVector.add(x,y,z);
 			push();
