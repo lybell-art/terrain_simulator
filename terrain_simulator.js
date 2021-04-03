@@ -236,6 +236,7 @@ function setup()
 function draw()
 {
 	lights();
+	directionalLight(240, 240, 240, 0.2, 1, 0.2);
 	changeBG();
 //	player.renderCamera();
 //	const pos=player.getPos();
