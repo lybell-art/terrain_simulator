@@ -222,15 +222,15 @@ class TerrainRenderer
 function setup()
 {
 	createCanvas(windowWidth,windowHeight,WEBGL);
-	player=new Player(0,0);
-	player.startCamera();
+//	player=new Player(0,0);
+//	player.startCamera();
 	tr=new TerrainRenderer();
 }
 
 function draw()
 {
 	changeBG();
-	player.renderCamera();
-	const pos=player.getPos();
-	tr.render(pos.x, pos.z);
+//	player.renderCamera();
+//	const pos=player.getPos();
+	tr.render(0,0);
 }
