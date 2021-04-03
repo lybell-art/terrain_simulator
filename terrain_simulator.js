@@ -231,5 +231,8 @@ function draw()
 	changeBG();
 //	player.renderCamera();
 //	const pos=player.getPos();
-	tr.render(0,0);
+//	tr.render(0,0);
+	box(40);
+	let a=new SnowTaigaRenderer(0,0,2,3);
+	a.render();
 }
