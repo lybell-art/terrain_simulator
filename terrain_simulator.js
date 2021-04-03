@@ -489,6 +489,8 @@ function draw()
 	changeLight();
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
+	
+	if(!!IS_MOBILE && touches.length > 0 && mobile_inButton()) mobile_playerMove();
 
 	if (keyIsDown(UP_ARROW) || keyIsDown(87) || virtualkeys[0]) player.move(PI);
 	if (keyIsDown(DOWN_ARROW) || keyIsDown(83) ||virtualkeys[1]) player.move(0);
@@ -523,22 +525,25 @@ function mobile_cameraMove()
 	}
 	else
 	{
-		let vect1=createVector(mouseX, mouseY);
-		let vect2=createVector(80+ 0.15*width, height-80-0.15*width);
-		let vect3=p5.Vector.sub(vect1,vect2);
-		let heading=vect3.heading();
-		virtualkeys=[false,false,false,false];
-		if(between(heading,-Math.PI*3/4, -Math.PI*1/4)) virtualkeys[0]=true;
-		else if(between(heading,-Math.PI*1/4, Math.PI*1/4)) virtualkeys[3]=true;
-		else if(between(heading,Math.PI*1/4, Math.PI*3/4)) virtualkeys[1]=true;
-		else virtualkeys[2]=true;
-		const vKeyID=["up", "down","left","right"];
-		for(var i=0;i<4;i++)
-		{
-			let b=document.getElementById(vKeyID[i]);
-			if(virtualkeys[i]) b.classList.add('on');
-			else  b.classList.remove('on');
-		}
+		mobile_playerMove();
+	}
+}
+function mobile_playerMove()
+{
+	let vect1=createVector(touches[0].x, touches[0].y);
+	let vect2=createVector(80+ 0.15*width, height-80-0.15*width);
+	let vect3=p5.Vector.sub(vect1,vect2);
+	let heading=vect3.heading();
+	if(between(heading,-Math.PI*3/4, -Math.PI*1/4)) virtualkeys[0]=true;
+	else if(between(heading,-Math.PI*1/4, Math.PI*1/4)) virtualkeys[3]=true;
+	else if(between(heading,Math.PI*1/4, Math.PI*3/4)) virtualkeys[1]=true;
+	else virtualkeys[2]=true;
+	const vKeyID=["up", "down","left","right"];
+	for(var i=0;i<4;i++)
+	{
+		let b=document.getElementById(vKeyID[i]);
+		if(virtualkeys[i]) b.classList.add('on');
+		else  b.classList.remove('on');
 	}
 }
 
