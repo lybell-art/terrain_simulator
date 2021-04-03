@@ -51,9 +51,12 @@ class Player
 	renderCamera()
 	{
 		let lookAt=SCS_to_OCS(this.baseDist,this.rotX,this.rotY);
+		console.log(lookAt);
 		lookAt.add(this.pos);
+		console.log(lookAt);
 		this.camera.setPosition(this.pos.x, this.pos.y, this.pos.z);
 		this.camera.lookAt(lookAt.x, lookAt.y, lookAt.z);
+		console.log(this.camera);
 	}
 	getPos()
 	{
