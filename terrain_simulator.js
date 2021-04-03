@@ -40,7 +40,7 @@ class Player
 	constructor(x,y)
 	{
 		this.camera=createCamera();
-		this.pos=new p5.Vector(x,-400, y);
+		this.pos=new p5.Vector(x,-300, y);
 		this.baseDist=height / 2 / tan((30 * PI) / 180);
 		this.rotX=0;
 		this.rotY=0;
