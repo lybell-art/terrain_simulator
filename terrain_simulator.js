@@ -1,8 +1,8 @@
 let player, tr;
 let virtualkeys=[false, false, false, false];
 const CHUNK_RADIUS=64;
-//const IS_MOBILE=('ontouchstart' in document.documentElement);
-const IS_MOBILE=(navigator.maxTouchPoints || 'ontouchstart' in document.documentElement);
+const IS_MOBILE=('ontouchstart' in document.documentElement);
+//const IS_MOBILE=(navigator.maxTouchPoints || 'ontouchstart' in document.documentElement);
 
 function between(input, a, b)
 {
