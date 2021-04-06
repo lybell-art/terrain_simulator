@@ -341,9 +341,9 @@ class SavannaRenderer extends ChunkRenderer
 		translate(_x,-this.y-trunkH/2,_z);
 		fill("#8f8576");
 		cylinder(trunkR, trunkH, 6, 1);
-		translate(0,-trunkR*2,0);
+		translate(0,-trunkR*4,0);
 		fill("#90cb70");
-		sphere(trunkR*2, 8, 6);
+		sphere(trunkR*4, 8, 6);
 		pop();
 	}
 	render()
