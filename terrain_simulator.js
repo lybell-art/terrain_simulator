@@ -154,6 +154,10 @@ class Player
 	{
 		this.pos.y -= upDown*this.moveSpeed;
 	}
+	setSpeed(speed)
+	{
+		this.moveSpeed=speed;
+	}
 	renderCamera()
 	{
 		let lookAt=SCS_to_OCS(this.baseDist,this.rotX,this.rotY);
@@ -489,19 +493,20 @@ function draw()
 	changeLight();
 	changeBG();
 	if(!IS_MOBILE) player.rotateCamera_PC();
-	
-	if(!!IS_MOBILE)
-	{
+	else{
 		if(touches.length > 0 && mobile_inButton()) mobile_playerMove();
 		else if(touches.length == 0) buttonReset();
 	}
 
-	if (keyIsDown(UP_ARROW) || keyIsDown(87) || virtualkeys[0]) player.move(PI);
-	if (keyIsDown(DOWN_ARROW) || keyIsDown(83) ||virtualkeys[1]) player.move(0);
-	if (keyIsDown(LEFT_ARROW) || keyIsDown(65) || virtualkeys[2]) player.move(-PI/2);
-	if (keyIsDown(RIGHT_ARROW) || keyIsDown(68) || virtualkeys[3]) player.move(PI/2);
-	if (keyIsDown(32)) player.altitude(1);
-	if (keyIsDown(SHIFT)) player.altitude(-1);
+	if (keyIsDown(81)) player.setSpeed(16); //Q
+	else player.setSpeed(8);
+	
+	if (keyIsDown(UP_ARROW) || keyIsDown(87) || virtualkeys[0]) player.move(PI); //W
+	if (keyIsDown(DOWN_ARROW) || keyIsDown(83) ||virtualkeys[1]) player.move(0); //S
+	if (keyIsDown(LEFT_ARROW) || keyIsDown(65) || virtualkeys[2]) player.move(-PI/2); //A
+	if (keyIsDown(RIGHT_ARROW) || keyIsDown(68) || virtualkeys[3]) player.move(PI/2); //D
+	if (keyIsDown(32)) player.altitude(1); //Space
+	if (keyIsDown(SHIFT)) player.altitude(-1); //Shift
 	
 	player.renderCamera();
 	const pos=player.getPos();
