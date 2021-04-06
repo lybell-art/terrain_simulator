@@ -1,3 +1,6 @@
+//고도에 따라 값이 바뀌고 사용자 커스텀 세계 생성 기능이 있었다면 어땠을까 하는 생각이 들고요
+//그놈의 렉을 줄여야지 연산이 많아갖고
+
 let player, tr;
 let virtualkeys=[false, false, false, false];
 const CHUNK_RADIUS=64;
