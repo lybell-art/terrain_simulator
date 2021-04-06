@@ -324,7 +324,7 @@ class PlainRenderer extends ChunkRenderer
 }
 class SavannaRenderer extends ChunkRenderer
 {
-	static _plain_color = "#acb765";
+	static _plain_color = "#9dbd4a";
 	static _ocean_color = "#43eec8";
 	constructor(_x, _z, _type, _y)
 	{
