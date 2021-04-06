@@ -369,9 +369,10 @@ class DesertRenderer extends ChunkRenderer
 	}
 	_pyramidDraw(_x, _z)
 	{
-		const r=CHUNK_RADIUS/2;
+		const r=CHUNK_RADIUS/3;
 		push();
 		translate(_x,-this.y-r/2,_z);
+		rotate(PI/4);
 		fill("#df9c47");
 		cone(r,-r,5,1);
 		pop();
